@@ -12,14 +12,12 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📅</text></svg>">
 
   <link rel="stylesheet" href="styles/variables.css">
+  <link rel="stylesheet" href="styles/themes.css">
+  <link rel="stylesheet" href="styles/components.css">
   <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
-  <header class="header">
-    <div class="container">
-      <h1>🗓️ Desde</h1>
-    </div>
-  </header>
+  <div id="header"></div>
 
   <main class="container">
     <section class="habits-section">
@@ -42,71 +40,29 @@
     </div>
   </footer>
 
+  <!-- Scripts - Ordem importa! -->
+  <script src="scripts/storage.js"></script>
+  <script src="scripts/habit-utils.js"></script>
+  <script src="scripts/theme.js"></script>
+
+  <script src="components/atoms/Button.js"></script>
+  <script src="components/atoms/Input.js"></script>
+  <script src="components/atoms/Icon.js"></script>
+  <script src="components/atoms/Badge.js"></script>
+
+  <script src="components/molecules/HabitCard.js"></script>
+  <script src="components/molecules/FormField.js"></script>
+  <script src="components/molecules/ThemeToggle.js"></script>
+  <script src="components/molecules/ConfirmDialog.js"></script>
+
+  <script src="components/organisms/Header.js"></script>
+  <script src="components/organisms/HabitList.js"></script>
+
+  <script src="scripts/app.js"></script>
+
   <script>
-    // Dados pré-carregados
-    const habits = [
-      {
-        name: 'Escrevendo',
-        startDate: '2024-01-01'
-      },
-      {
-        name: 'Codando',
-        startDate: '2025-08-07'
-      },
-      {
-        name: 'Exercícios Físicos',
-        startDate: '2025-12-26'
-      },
-      {
-        name: 'Ler livros',
-        startDate: '2025-12-26'
-      }
-    ];
-
-    // Função para calcular dias desde a data inicial
-    function calculateDaysSince(startDate) {
-      const [year, month, day] = startDate.split('-');
-      const start = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-      const diffTime = Math.abs(today - start);
-      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-      return diffDays;
-    }
-
-    // Função para formatar data em português
-    function formatDate(dateString) {
-      const [year, month, day] = dateString.split('-');
-      const months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
-                      'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
-      const monthName = months[parseInt(month) - 1];
-      return `${parseInt(day)} de ${monthName} de ${year}`;
-    }
-
-    // Renderizar cards de hábitos
-    function renderHabits() {
-      const habitsList = document.getElementById('habitsList');
-
-      habitsList.innerHTML = habits.map(habit => {
-        const days = calculateDaysSince(habit.startDate);
-        const formattedDate = formatDate(habit.startDate);
-        const daysLabel = days === 1 ? 'Dia' : 'Dias';
-
-        return `
-          <div class="habit-card">
-            <h3 class="habit-name">${habit.name}</h3>
-            <p class="habit-since">Desde <strong>${formattedDate}</strong></p>
-            <div class="habit-days">
-              <span class="days-number">${days}</span>
-              <span class="days-label">${daysLabel} Total</span>
-            </div>
-          </div>
-        `;
-      }).join('');
-    }
-
-    // Renderizar ao carregar a página
-    document.addEventListener('DOMContentLoaded', renderHabits);
+    // Renderizar Header
+    document.getElementById('header').innerHTML = Header.render();
   </script>
 </body>
 </html>
