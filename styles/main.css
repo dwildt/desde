@@ -28,21 +28,15 @@ body {
 .header {
   background: var(--gradient-wildtech);
   color: white;
-  padding: var(--spacing-xl) 0;
+  padding: var(--spacing-md) 0;
   text-align: center;
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-sm);
 }
 
 .header h1 {
-  font-size: var(--font-size-2xl);
+  font-size: var(--font-size-xl);
   font-weight: var(--font-weight-bold);
-  margin-bottom: var(--spacing-sm);
-}
-
-.subtitle {
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-normal);
-  opacity: 0.95;
+  margin: 0;
 }
 
 /* Main */
@@ -148,14 +142,14 @@ main {
   }
 
   .header h1 {
-    font-size: var(--font-size-xl);
-  }
-
-  .subtitle {
-    font-size: var(--font-size-md);
+    font-size: var(--font-size-lg);
   }
 
   .container {
     padding: 0 var(--spacing-md);
+  }
+
+  .header {
+    padding: var(--spacing-sm) 0;
   }
 }
