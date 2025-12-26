@@ -158,6 +158,14 @@
   margin-top: var(--spacing-lg);
 }
 
+/* Confirm Message */
+.confirm-message {
+  font-size: var(--font-size-md);
+  color: var(--text-primary);
+  line-height: 1.6;
+  margin: 0;
+}
+
 /* Form Field */
 .form-field {
   margin-bottom: var(--spacing-md);

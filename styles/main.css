@@ -77,11 +77,33 @@ main {
   box-shadow: var(--shadow-lg);
 }
 
+.habit-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--spacing-md);
+}
+
 .habit-name {
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-bold);
   color: var(--text-primary);
-  margin-bottom: var(--spacing-md);
+  margin: 0;
+}
+
+.habit-delete-btn {
+  background: transparent;
+  border: none;
+  font-size: var(--font-size-lg);
+  cursor: pointer;
+  padding: var(--spacing-xs);
+  opacity: 0.6;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.habit-delete-btn:hover {
+  opacity: 1;
+  transform: scale(1.2);
 }
 
 .habit-since {

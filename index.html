@@ -68,8 +68,9 @@
     // Renderizar Header
     document.getElementById('header').innerHTML = Header.render();
 
-    // Renderizar Modal
-    document.getElementById('modalContainer').innerHTML = AddHabitModal.render();
+    // Renderizar Modals
+    document.getElementById('modalContainer').innerHTML =
+      AddHabitModal.render() + ConfirmDialog.render();
   </script>
 </body>
 </html>

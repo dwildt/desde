@@ -88,11 +88,33 @@ function handleAddHabit(event) {
 }
 
 /**
+ * Manipula deleção de hábito
+ */
+function handleDeleteHabit(event) {
+  const { habitId } = event.detail;
+
+  // Deletar hábito do storage
+  const success = Storage.deleteHabit(habitId);
+
+  if (success) {
+    // Re-renderizar lista
+    renderApp();
+
+    console.log('Hábito deletado com sucesso:', habitId);
+  } else {
+    alert('Erro ao deletar hábito. Tente novamente.');
+  }
+}
+
+/**
  * Inicializa event listeners
  */
 function initializeEventListeners() {
   // Listener para adicionar hábito
   window.addEventListener('habit:add', handleAddHabit);
+
+  // Listener para deletar hábito
+  window.addEventListener('habit:delete', handleDeleteHabit);
 }
 
 /**

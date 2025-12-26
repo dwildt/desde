@@ -18,7 +18,16 @@ class HabitCard {
 
     return `
       <div class="habit-card">
-        <h3 class="habit-name">${habit.name}</h3>
+        <div class="habit-card-header">
+          <h3 class="habit-name">${habit.name}</h3>
+          <button
+            class="habit-delete-btn"
+            onclick="ConfirmDialog.open('${habit.id}', '${habit.name}')"
+            aria-label="Deletar hábito ${habit.name}"
+          >
+            🗑️
+          </button>
+        </div>
         <p class="habit-since">Desde <strong>${formattedDate}</strong></p>
         <div class="habit-days">
           <span class="days-number">${days}</span>
