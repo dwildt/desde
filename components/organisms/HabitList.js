@@ -20,11 +20,7 @@ class HabitList {
       return HabitCard.render(habit, days, formattedDate);
     }).join('');
 
-    return `
-      <div class="habits-list">
-        ${habitCards}
-      </div>
-    `;
+    return habitCards;
   }
 
   /**
