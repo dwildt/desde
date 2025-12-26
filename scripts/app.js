@@ -107,6 +107,36 @@ function handleDeleteHabit(event) {
 }
 
 /**
+ * Manipula exportação de dados
+ */
+function handleExport() {
+  const data = Storage.exportData();
+
+  // Criar blob com dados JSON
+  const jsonString = JSON.stringify(data, null, 2);
+  const blob = new Blob([jsonString], { type: 'application/json' });
+
+  // Criar link de download
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+
+  // Nome do arquivo com data atual
+  const date = new Date().toISOString().split('T')[0];
+  link.download = `desde-backup-${date}.json`;
+
+  // Fazer download
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+
+  // Limpar URL
+  URL.revokeObjectURL(url);
+
+  console.log('Dados exportados com sucesso');
+}
+
+/**
  * Inicializa event listeners
  */
 function initializeEventListeners() {
@@ -115,6 +145,9 @@ function initializeEventListeners() {
 
   // Listener para deletar hábito
   window.addEventListener('habit:delete', handleDeleteHabit);
+
+  // Listener para exportar dados
+  window.addEventListener('data:export', handleExport);
 }
 
 /**
