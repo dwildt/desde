@@ -45,6 +45,14 @@ function renderApp() {
 
   if (habitsList) {
     habitsList.innerHTML = HabitList.render(habits);
+
+    // Adiciona classe para animações escalonadas
+    habitsList.classList.add('loaded');
+
+    // Remove e re-adiciona para re-trigger das animações
+    setTimeout(() => {
+      habitsList.classList.remove('loaded');
+    }, 1000);
   }
 }
 

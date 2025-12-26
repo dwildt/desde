@@ -1,0 +1,312 @@
+/* Animations and UX Improvements */
+
+/* Keyframe Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInFromBottom {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+/* Apply animations to components */
+
+/* Habit cards fade in on load */
+.habit-card {
+  animation: fadeIn 0.4s ease-out;
+}
+
+.habit-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.habit-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.habit-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.habit-card:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+.habit-card:nth-child(n+5) {
+  animation-delay: 0.5s;
+}
+
+/* Hover effects for habit cards */
+.habit-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.habit-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Modal animations */
+.modal {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.modal-content {
+  animation: slideInFromBottom 0.4s ease-out;
+}
+
+/* Button pulse on hover */
+.button-primary:hover {
+  animation: pulse 0.6s ease-in-out;
+}
+
+/* Form feedback animations */
+.input:focus {
+  animation: pulse 0.3s ease-out;
+}
+
+/* Delete button shake on hover */
+.habit-delete-btn:hover {
+  animation: shake 0.5s ease-in-out;
+}
+
+/* Success feedback */
+@keyframes successPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(40, 167, 69, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(40, 167, 69, 0);
+  }
+}
+
+.habit-card.success-feedback {
+  animation: successPulse 0.6s ease-out;
+}
+
+/* Loading state */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 123, 0, 0.3);
+  border-top-color: var(--primary-color);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+/* Empty state fade in */
+.empty-state {
+  animation: fadeInScale 0.5s ease-out;
+}
+
+/* Badge pulse for new items */
+.badge.new {
+  animation: pulse 1s ease-in-out 3;
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Focus visible for accessibility */
+*:focus-visible {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Theme toggle smooth transition */
+.theme-toggle {
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.theme-toggle:hover {
+  transform: rotate(20deg) scale(1.1);
+}
+
+/* Header fade in on load */
+.header {
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Form validation feedback */
+.input.error {
+  border-color: #dc3545;
+  animation: shake 0.5s ease-in-out;
+}
+
+.input.success {
+  border-color: #28a745;
+}
+
+/* Tooltip fade in */
+[data-tooltip] {
+  position: relative;
+}
+
+[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--text-primary);
+  color: var(--background);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-sm);
+  font-size: var(--font-size-sm);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  margin-bottom: 8px;
+}
+
+[data-tooltip]:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-5px);
+}
+
+/* Skeleton loading for placeholders */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--surface) 0%,
+    var(--border-color) 50%,
+    var(--surface) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--border-radius-sm);
+}
+
+/* Notification slide in */
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.notification {
+  animation: slideInFromRight 0.4s ease-out;
+}
+
+/* Ripple effect on button click */
+.button {
+  position: relative;
+  overflow: hidden;
+}
+
+.button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.button:active::after {
+  width: 300px;
+  height: 300px;
+}
+
+/* Stagger animation for habit list */
+.habit-list.loaded .habit-card {
+  animation: fadeIn 0.5s ease-out backwards;
+}
+
+.habit-list.loaded .habit-card:nth-child(1) { animation-delay: 0.05s; }
+.habit-list.loaded .habit-card:nth-child(2) { animation-delay: 0.1s; }
+.habit-list.loaded .habit-card:nth-child(3) { animation-delay: 0.15s; }
+.habit-list.loaded .habit-card:nth-child(4) { animation-delay: 0.2s; }
+.habit-list.loaded .habit-card:nth-child(5) { animation-delay: 0.25s; }
+.habit-list.loaded .habit-card:nth-child(6) { animation-delay: 0.3s; }
+.habit-list.loaded .habit-card:nth-child(7) { animation-delay: 0.35s; }
+.habit-list.loaded .habit-card:nth-child(8) { animation-delay: 0.4s; }
+.habit-list.loaded .habit-card:nth-child(n+9) { animation-delay: 0.45s; }
