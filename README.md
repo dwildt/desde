@@ -246,10 +246,10 @@ Este projeto é open source e está disponível sob a [MIT License](LICENSE).
 
 ## 👨‍💻 Autor
 
-Desenvolvido por **David Wildt** como parte do desafio #100DaysOfCode.
+Desenvolvido por **Daniel Wildt** como parte do desafio #100DaysOfCode.
 
 - GitHub: [@dwildt](https://github.com/dwildt)
-- LinkedIn: [David Wildt](https://www.linkedin.com/in/davidwildt/)
+- LinkedIn: [Daniel Wildt](https://www.linkedin.com/in/danielwildt/)
 
 ## 🙏 Agradecimentos
 
