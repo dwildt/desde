@@ -14,7 +14,15 @@ class Header {
         <div class="container">
           <div class="header-content">
             <h1>🗓️ Desde</h1>
-            ${ThemeToggle.render()}
+            <div class="header-actions">
+              ${Button.render({
+                text: '+ Adicionar Hábito',
+                variant: 'primary',
+                onClick: 'AddHabitModal.open()',
+                ariaLabel: 'Adicionar novo hábito'
+              })}
+              ${ThemeToggle.render()}
+            </div>
           </div>
         </div>
       </header>

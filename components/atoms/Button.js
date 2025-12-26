@@ -11,15 +11,16 @@ class Button {
    * @param {string} options.variant - Variante do botão (primary, secondary, danger)
    * @param {string} options.onClick - Função onClick
    * @param {string} options.ariaLabel - Label de acessibilidade
+   * @param {string} options.type - Tipo do botão (button, submit, reset)
    * @returns {string} HTML do botão
    */
-  static render({ text, variant = 'primary', onClick = '', ariaLabel = '' }) {
+  static render({ text, variant = 'primary', onClick = '', ariaLabel = '', type = 'button' }) {
     const variantClass = `button-${variant}`;
     const ariaAttr = ariaLabel ? `aria-label="${ariaLabel}"` : '';
     const onClickAttr = onClick ? `onclick="${onClick}"` : '';
 
     return `
-      <button class="button ${variantClass}" ${onClickAttr} ${ariaAttr}>
+      <button type="${type}" class="button ${variantClass}" ${onClickAttr} ${ariaAttr}>
         ${text}
       </button>
     `;
