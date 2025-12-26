@@ -195,4 +195,9 @@ document.addEventListener('DOMContentLoaded', () => {
   renderApp();
   updateThemeIcon();
   initializeEventListeners();
+
+  // Verificar se é a primeira visita e mostrar modal de boas-vindas
+  if (typeof WelcomeModal !== 'undefined') {
+    WelcomeModal.checkFirstVisit();
+  }
 });

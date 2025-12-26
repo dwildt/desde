@@ -234,3 +234,57 @@
   margin-top: var(--spacing-sm);
   font-style: italic;
 }
+
+/* Welcome Modal */
+.welcome-modal-content {
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.welcome-section {
+  margin-bottom: var(--spacing-xl);
+}
+
+.welcome-section h3 {
+  font-size: var(--font-size-lg);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-sm);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.welcome-section p {
+  font-size: var(--font-size-md);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: var(--spacing-sm);
+}
+
+.welcome-section ul {
+  margin-left: var(--spacing-lg);
+  margin-top: var(--spacing-sm);
+}
+
+.welcome-section li {
+  font-size: var(--font-size-md);
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: var(--spacing-xs);
+}
+
+.welcome-important {
+  background: var(--surface);
+  padding: var(--spacing-md);
+  border-left: 4px solid var(--primary-orange);
+  border-radius: var(--border-radius-sm);
+}
+
+.welcome-tip {
+  background: rgba(255, 123, 0, 0.1);
+  padding: var(--spacing-sm);
+  border-radius: var(--border-radius-sm);
+  margin-top: var(--spacing-md);
+  font-size: var(--font-size-sm);
+}
