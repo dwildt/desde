@@ -68,6 +68,34 @@ function updateThemeIcon() {
 }
 
 /**
+ * Manipula adição de hábito
+ */
+function handleAddHabit(event) {
+  const { name, startDate } = event.detail;
+
+  // Adicionar hábito no storage
+  const success = Storage.addHabit({ name, startDate });
+
+  if (success) {
+    // Re-renderizar lista
+    renderApp();
+
+    // Feedback visual (opcional - por enquanto apenas re-renderiza)
+    console.log('Hábito adicionado com sucesso:', name);
+  } else {
+    alert('Erro ao adicionar hábito. Tente novamente.');
+  }
+}
+
+/**
+ * Inicializa event listeners
+ */
+function initializeEventListeners() {
+  // Listener para adicionar hábito
+  window.addEventListener('habit:add', handleAddHabit);
+}
+
+/**
  * Inicializa a aplicação
  */
 document.addEventListener('DOMContentLoaded', () => {
@@ -75,4 +103,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initializeData();
   renderApp();
   updateThemeIcon();
+  initializeEventListeners();
 });
