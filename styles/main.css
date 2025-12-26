@@ -221,6 +221,65 @@ main {
   margin-bottom: var(--spacing-lg);
 }
 
+/* Print Styles */
+@media print {
+  /* Ocultar elementos de ação */
+  .theme-toggle,
+  .habit-delete-btn,
+  button[aria-label*="Importar"],
+  button[aria-label*="Exportar"],
+  .skip-to-content,
+  .footer-links {
+    display: none !important;
+  }
+
+  /* Simplificar header */
+  .header {
+    background: none !important;
+    color: var(--text-primary) !important;
+    padding: var(--spacing-md) 0;
+  }
+
+  .header-actions button[aria-label*="Adicionar"] {
+    display: none !important;
+  }
+
+  /* Otimizar cards para impressão */
+  .habit-card {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid #ddd;
+  }
+
+  .habits-list {
+    gap: var(--spacing-md);
+  }
+
+  /* Remover animações */
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  /* Cores para impressão */
+  body {
+    background: white;
+    color: black;
+  }
+
+  .habit-days {
+    background: #f0f0f0 !important;
+    color: black !important;
+  }
+
+  /* Simplificar footer */
+  .footer {
+    border-top: 1px solid #ddd;
+    page-break-after: avoid;
+  }
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .habits-list {
