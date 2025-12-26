@@ -122,6 +122,20 @@ main {
 .footer p {
   font-size: var(--font-size-sm);
   color: var(--text-secondary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+  font-size: var(--font-size-xs);
+}
+
+.footer-links .separator {
+  color: var(--text-secondary);
 }
 
 .footer a {
@@ -133,6 +147,7 @@ main {
 
 .footer a:hover {
   opacity: 0.8;
+  text-decoration: underline;
 }
 
 /* Responsive */
