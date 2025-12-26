@@ -17,23 +17,25 @@ class HabitCard {
     const daysLabel = days === 1 ? 'Dia' : 'Dias';
 
     return `
-      <div class="habit-card">
+      <article class="habit-card" role="article" aria-labelledby="habit-name-${habit.id}">
         <div class="habit-card-header">
-          <h3 class="habit-name">${habit.name}</h3>
+          <h3 id="habit-name-${habit.id}" class="habit-name">${habit.name}</h3>
           <button
             class="habit-delete-btn"
             onclick="ConfirmDialog.open('${habit.id}', '${habit.name}')"
             aria-label="Deletar hábito ${habit.name}"
+            data-tooltip="Deletar hábito"
+            tabindex="0"
           >
             🗑️
           </button>
         </div>
         <p class="habit-since">Desde <strong>${formattedDate}</strong></p>
-        <div class="habit-days">
-          <span class="days-number">${days}</span>
+        <div class="habit-days" aria-live="polite">
+          <span class="days-number" aria-label="${days} ${daysLabel.toLowerCase()}">${days}</span>
           <span class="days-label">${daysLabel} Total</span>
         </div>
-      </div>
+      </article>
     `;
   }
 }

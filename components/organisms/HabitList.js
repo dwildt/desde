@@ -29,8 +29,8 @@ class HabitList {
    */
   static renderEmptyState() {
     return `
-      <div class="empty-state">
-        <span class="empty-icon">📝</span>
+      <div class="empty-state" role="status" aria-live="polite">
+        <span class="empty-icon" aria-hidden="true">📝</span>
         <h2>Nenhum hábito cadastrado</h2>
         <p>Adicione seu primeiro hábito para começar a acompanhar!</p>
       </div>

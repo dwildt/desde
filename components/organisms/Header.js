@@ -10,11 +10,11 @@ class Header {
    */
   static render() {
     return `
-      <header class="header">
+      <header class="header" role="banner">
         <div class="container">
           <div class="header-content">
             <h1>🗓️ Desde</h1>
-            <div class="header-actions">
+            <nav class="header-actions" role="navigation" aria-label="Ações principais">
               ${Button.render({
                 text: '+ Adicionar Hábito',
                 variant: 'primary',
@@ -28,7 +28,7 @@ class Header {
                 ariaLabel: 'Importar ou Exportar dados'
               })}
               ${ThemeToggle.render()}
-            </div>
+            </nav>
           </div>
         </div>
       </header>

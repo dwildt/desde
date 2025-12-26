@@ -10,17 +10,35 @@ class AddHabitModal {
    */
   static render() {
     return `
-      <div id="addHabitModal" class="modal" style="display: none;">
+      <div
+        id="addHabitModal"
+        class="modal"
+        style="display: none;"
+        role="dialog"
+        aria-labelledby="addHabitModalTitle"
+        aria-modal="true"
+      >
         <div class="modal-overlay" onclick="AddHabitModal.close()"></div>
         <div class="modal-content">
           <div class="modal-header">
-            <h2>Adicionar Novo Hábito</h2>
-            <button class="modal-close" onclick="AddHabitModal.close()" aria-label="Fechar modal">
+            <h2 id="addHabitModalTitle">Adicionar Novo Hábito</h2>
+            <button
+              class="modal-close"
+              onclick="AddHabitModal.close()"
+              aria-label="Fechar modal de adicionar hábito"
+              data-tooltip="Fechar"
+              tabindex="0"
+            >
               ✕
             </button>
           </div>
 
-          <form id="addHabitForm" class="modal-body" onsubmit="AddHabitModal.handleSubmit(event)">
+          <form
+            id="addHabitForm"
+            class="modal-body"
+            onsubmit="AddHabitModal.handleSubmit(event)"
+            aria-label="Formulário para adicionar novo hábito"
+          >
             ${FormField.render({
               id: 'habitName',
               label: 'Nome do Hábito',
@@ -41,12 +59,14 @@ class AddHabitModal {
               ${Button.render({
                 text: 'Cancelar',
                 variant: 'secondary',
-                onClick: 'AddHabitModal.close()'
+                onClick: 'AddHabitModal.close()',
+                ariaLabel: 'Cancelar criação de hábito'
               })}
               ${Button.render({
                 text: 'Adicionar',
                 variant: 'primary',
-                type: 'submit'
+                type: 'submit',
+                ariaLabel: 'Salvar novo hábito'
               })}
             </div>
           </form>
@@ -62,7 +82,19 @@ class AddHabitModal {
     const modal = document.getElementById('addHabitModal');
     if (modal) {
       modal.style.display = 'flex';
-      document.getElementById('habitName')?.focus();
+
+      // Adicionar listener para tecla ESC
+      this.escListener = (e) => {
+        if (e.key === 'Escape') {
+          this.close();
+        }
+      };
+      document.addEventListener('keydown', this.escListener);
+
+      // Focus no primeiro campo
+      setTimeout(() => {
+        document.getElementById('habitName')?.focus();
+      }, 100);
     }
   }
 
@@ -74,6 +106,12 @@ class AddHabitModal {
     if (modal) {
       modal.style.display = 'none';
       document.getElementById('addHabitForm')?.reset();
+
+      // Remover listener da tecla ESC
+      if (this.escListener) {
+        document.removeEventListener('keydown', this.escListener);
+        this.escListener = null;
+      }
     }
   }
 

@@ -10,20 +10,33 @@ class ImportExportModal {
    */
   static render() {
     return `
-      <div id="importExportModal" class="modal" style="display: none;">
+      <div
+        id="importExportModal"
+        class="modal"
+        style="display: none;"
+        role="dialog"
+        aria-labelledby="importExportModalTitle"
+        aria-modal="true"
+      >
         <div class="modal-overlay" onclick="ImportExportModal.close()"></div>
         <div class="modal-content">
           <div class="modal-header">
-            <h2>Importar / Exportar Dados</h2>
-            <button class="modal-close" onclick="ImportExportModal.close()" aria-label="Fechar modal">
+            <h2 id="importExportModalTitle">Importar / Exportar Dados</h2>
+            <button
+              class="modal-close"
+              onclick="ImportExportModal.close()"
+              aria-label="Fechar modal de importar/exportar"
+              data-tooltip="Fechar"
+              tabindex="0"
+            >
               ✕
             </button>
           </div>
 
           <div class="modal-body">
             <!-- Export Section -->
-            <div class="import-export-section">
-              <h3>Exportar Dados</h3>
+            <section class="import-export-section" aria-labelledby="exportSectionTitle">
+              <h3 id="exportSectionTitle">Exportar Dados</h3>
               <p class="section-description">
                 Faça backup dos seus hábitos exportando para um arquivo JSON.
               </p>
@@ -33,14 +46,14 @@ class ImportExportModal {
                 onClick: 'ImportExportModal.handleExport()',
                 ariaLabel: 'Exportar dados para JSON'
               })}
-            </div>
+            </section>
 
             <!-- Divider -->
-            <div class="modal-divider"></div>
+            <div class="modal-divider" role="separator" aria-hidden="true"></div>
 
             <!-- Import Section -->
-            <div class="import-export-section">
-              <h3>Importar Dados</h3>
+            <section class="import-export-section" aria-labelledby="importSectionTitle">
+              <h3 id="importSectionTitle">Importar Dados</h3>
               <p class="section-description">
                 Restaure seus hábitos a partir de um arquivo JSON exportado anteriormente.
               </p>
@@ -51,6 +64,7 @@ class ImportExportModal {
                 accept=".json"
                 style="display: none;"
                 onchange="ImportExportModal.handleFileSelect(event)"
+                aria-label="Selecionar arquivo JSON"
               />
 
               ${Button.render({
@@ -60,15 +74,16 @@ class ImportExportModal {
                 ariaLabel: 'Selecionar arquivo JSON para importar'
               })}
 
-              <p id="importFileName" class="import-file-name"></p>
-            </div>
+              <p id="importFileName" class="import-file-name" role="status" aria-live="polite"></p>
+            </section>
           </div>
 
           <div class="modal-footer">
             ${Button.render({
               text: 'Fechar',
               variant: 'secondary',
-              onClick: 'ImportExportModal.close()'
+              onClick: 'ImportExportModal.close()',
+              ariaLabel: 'Fechar modal'
             })}
           </div>
         </div>
@@ -83,11 +98,26 @@ class ImportExportModal {
     const modal = document.getElementById('importExportModal');
     if (modal) {
       modal.style.display = 'flex';
+
       // Limpar nome do arquivo selecionado
       const fileNameEl = document.getElementById('importFileName');
       if (fileNameEl) {
         fileNameEl.textContent = '';
       }
+
+      // Adicionar listener para tecla ESC
+      this.escListener = (e) => {
+        if (e.key === 'Escape') {
+          this.close();
+        }
+      };
+      document.addEventListener('keydown', this.escListener);
+
+      // Focus no primeiro botão
+      setTimeout(() => {
+        const firstButton = modal.querySelector('button');
+        if (firstButton) firstButton.focus();
+      }, 100);
     }
   }
 
@@ -98,10 +128,17 @@ class ImportExportModal {
     const modal = document.getElementById('importExportModal');
     if (modal) {
       modal.style.display = 'none';
+
       // Resetar input de arquivo
       const fileInput = document.getElementById('importFileInput');
       if (fileInput) {
         fileInput.value = '';
+      }
+
+      // Remover listener da tecla ESC
+      if (this.escListener) {
+        document.removeEventListener('keydown', this.escListener);
+        this.escListener = null;
       }
     }
   }

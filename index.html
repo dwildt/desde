@@ -18,11 +18,12 @@
   <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
+  <a href="#main-content" class="skip-to-content">Pular para o conteúdo principal</a>
   <div id="header"></div>
 
-  <main class="container">
-    <section class="habits-section">
-      <div id="habitsList" class="habits-list">
+  <main class="container" role="main" id="main-content">
+    <section class="habits-section" aria-label="Lista de hábitos">
+      <div id="habitsList" class="habits-list" role="list">
         <!-- Cards serão renderizados aqui pelo JavaScript -->
       </div>
     </section>
@@ -31,16 +32,16 @@
   <!-- Modal -->
   <div id="modalContainer"></div>
 
-  <footer class="footer">
+  <footer class="footer" role="contentinfo">
     <div class="container">
-      <p>Feito com 💖 por <a href="https://github.com/dwildt" target="_blank">dwildt</a></p>
-      <div class="footer-links">
-        <a href="https://github.com/sponsors/dwildt" target="_blank">GitHub Sponsors</a>
-        <span class="separator">•</span>
-        <a href="https://patreon.com/dwildt" target="_blank">Patreon</a>
-        <span class="separator">•</span>
-        <a href="https://apoia.se/dwildt" target="_blank">Apoia.se</a>
-      </div>
+      <p>Feito com <span aria-hidden="true">💖</span> por <a href="https://github.com/dwildt" target="_blank" rel="noopener noreferrer" aria-label="Perfil do dwildt no GitHub">dwildt</a></p>
+      <nav class="footer-links" role="navigation" aria-label="Links de apoio">
+        <a href="https://github.com/sponsors/dwildt" target="_blank" rel="noopener noreferrer" aria-label="Apoiar no GitHub Sponsors">GitHub Sponsors</a>
+        <span class="separator" aria-hidden="true">•</span>
+        <a href="https://patreon.com/dwildt" target="_blank" rel="noopener noreferrer" aria-label="Apoiar no Patreon">Patreon</a>
+        <span class="separator" aria-hidden="true">•</span>
+        <a href="https://apoia.se/dwildt" target="_blank" rel="noopener noreferrer" aria-label="Apoiar no Apoia.se">Apoia.se</a>
+      </nav>
     </div>
   </footer>
 

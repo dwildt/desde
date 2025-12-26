@@ -10,8 +10,14 @@ class ThemeToggle {
    */
   static render() {
     return `
-      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Alternar tema">
-        <span class="theme-icon">🌙</span>
+      <button
+        class="theme-toggle"
+        onclick="toggleTheme()"
+        aria-label="Alternar entre tema claro e escuro"
+        data-tooltip="Alternar tema"
+        tabindex="0"
+      >
+        <span class="theme-icon" aria-hidden="true">🌙</span>
       </button>
     `;
   }

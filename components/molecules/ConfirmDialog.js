@@ -12,12 +12,26 @@ class ConfirmDialog {
    */
   static render() {
     return `
-      <div id="confirmDialog" class="modal" style="display: none;">
+      <div
+        id="confirmDialog"
+        class="modal"
+        style="display: none;"
+        role="dialog"
+        aria-labelledby="confirmDialogTitle"
+        aria-describedby="confirmMessage"
+        aria-modal="true"
+      >
         <div class="modal-overlay" onclick="ConfirmDialog.close()"></div>
         <div class="modal-content">
           <div class="modal-header">
-            <h2>Confirmar Exclusão</h2>
-            <button class="modal-close" onclick="ConfirmDialog.close()" aria-label="Fechar modal">
+            <h2 id="confirmDialogTitle">Confirmar Exclusão</h2>
+            <button
+              class="modal-close"
+              onclick="ConfirmDialog.close()"
+              aria-label="Fechar modal de confirmação"
+              data-tooltip="Fechar"
+              tabindex="0"
+            >
               ✕
             </button>
           </div>
@@ -30,12 +44,14 @@ class ConfirmDialog {
             ${Button.render({
               text: 'Cancelar',
               variant: 'secondary',
-              onClick: 'ConfirmDialog.close()'
+              onClick: 'ConfirmDialog.close()',
+              ariaLabel: 'Cancelar exclusão do hábito'
             })}
             ${Button.render({
               text: 'Deletar',
               variant: 'danger',
-              onClick: 'ConfirmDialog.confirm()'
+              onClick: 'ConfirmDialog.confirm()',
+              ariaLabel: 'Confirmar exclusão do hábito'
             })}
           </div>
         </div>
@@ -57,6 +73,20 @@ class ConfirmDialog {
     if (modal && message) {
       message.textContent = `Tem certeza que deseja deletar o hábito "${habitName}"? Esta ação não pode ser desfeita.`;
       modal.style.display = 'flex';
+
+      // Adicionar listener para tecla ESC
+      this.escListener = (e) => {
+        if (e.key === 'Escape') {
+          this.close();
+        }
+      };
+      document.addEventListener('keydown', this.escListener);
+
+      // Focus no primeiro botão
+      setTimeout(() => {
+        const firstButton = modal.querySelector('button');
+        if (firstButton) firstButton.focus();
+      }, 100);
     }
   }
 
@@ -68,6 +98,12 @@ class ConfirmDialog {
     if (modal) {
       modal.style.display = 'none';
       this.currentHabitId = null;
+
+      // Remover listener da tecla ESC
+      if (this.escListener) {
+        document.removeEventListener('keydown', this.escListener);
+        this.escListener = null;
+      }
     }
   }
 

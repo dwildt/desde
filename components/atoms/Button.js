@@ -20,7 +20,13 @@ class Button {
     const onClickAttr = onClick ? `onclick="${onClick}"` : '';
 
     return `
-      <button type="${type}" class="button ${variantClass}" ${onClickAttr} ${ariaAttr}>
+      <button
+        type="${type}"
+        class="button ${variantClass}"
+        ${onClickAttr}
+        ${ariaAttr}
+        tabindex="0"
+      >
         ${text}
       </button>
     `;

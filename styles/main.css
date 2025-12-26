@@ -16,6 +16,26 @@ body {
   flex-direction: column;
 }
 
+/* Skip to content - Acessibilidade */
+.skip-to-content {
+  position: absolute;
+  top: -100px;
+  left: 0;
+  background: var(--primary-color);
+  color: white;
+  padding: var(--spacing-sm) var(--spacing-md);
+  text-decoration: none;
+  z-index: 10000;
+  font-weight: var(--font-weight-bold);
+  border-radius: 0 0 var(--border-radius-sm) 0;
+}
+
+.skip-to-content:focus {
+  top: 0;
+  outline: 3px solid white;
+  outline-offset: 2px;
+}
+
 /* Container */
 .container {
   max-width: 1200px;
