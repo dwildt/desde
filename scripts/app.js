@@ -137,6 +137,31 @@ function handleExport() {
 }
 
 /**
+ * Manipula importação de dados
+ */
+function handleImport(event) {
+  const { data } = event.detail;
+
+  // Validar e importar dados
+  const success = Storage.importData(data);
+
+  if (success) {
+    // Re-renderizar aplicação com novos dados
+    renderApp();
+
+    // Fechar modal e mostrar mensagem de sucesso
+    if (typeof ImportExportModal !== 'undefined') {
+      ImportExportModal.close();
+    }
+
+    alert('Dados importados com sucesso!');
+    console.log('Dados importados com sucesso');
+  } else {
+    alert('Erro ao importar dados. Verifique se o arquivo está no formato correto.');
+  }
+}
+
+/**
  * Inicializa event listeners
  */
 function initializeEventListeners() {
@@ -148,6 +173,9 @@ function initializeEventListeners() {
 
   // Listener para exportar dados
   window.addEventListener('data:export', handleExport);
+
+  // Listener para importar dados
+  window.addEventListener('data:import', handleImport);
 }
 
 /**
