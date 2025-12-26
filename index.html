@@ -65,8 +65,10 @@
 
     // Função para calcular dias desde a data inicial
     function calculateDaysSince(startDate) {
-      const start = new Date(startDate);
+      const [year, month, day] = startDate.split('-');
+      const start = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
       const today = new Date();
+      today.setHours(0, 0, 0, 0);
       const diffTime = Math.abs(today - start);
       const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
       return diffDays;
@@ -74,13 +76,11 @@
 
     // Função para formatar data em português
     function formatDate(dateString) {
-      const date = new Date(dateString);
-      const day = date.getDate().toString().padStart(2, '0');
+      const [year, month, day] = dateString.split('-');
       const months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
                       'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
-      const month = months[date.getMonth()];
-      const year = date.getFullYear();
-      return `${day} de ${month} de ${year}`;
+      const monthName = months[parseInt(month) - 1];
+      return `${parseInt(day)} de ${monthName} de ${year}`;
     }
 
     // Renderizar cards de hábitos
