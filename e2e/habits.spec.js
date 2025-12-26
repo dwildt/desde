@@ -21,7 +21,7 @@ test.describe('Fluxo Principal de Hábitos', () => {
 
     // Verificar que existem hábitos pré-cadastrados
     const habitCards = page.locator('.habit-card');
-    await expect(habitCards).toHaveCount(4);
+    await expect(habitCards).toHaveCount(3);
 
     // Verificar nomes dos hábitos
     await expect(page.locator('.habit-name').first()).toContainText('Escrevendo');
@@ -43,9 +43,9 @@ test.describe('Fluxo Principal de Hábitos', () => {
     // Verificar que o hábito foi adicionado
     await expect(page.locator('.habit-name:has-text("Meditação")')).toBeVisible();
 
-    // Verificar que temos 5 hábitos agora
+    // Verificar que temos 4 hábitos agora (3 pré-cadastrados + 1 novo)
     const habitCards = page.locator('.habit-card');
-    await expect(habitCards).toHaveCount(5);
+    await expect(habitCards).toHaveCount(4);
   });
 
   test('deve deletar um hábito', async ({ page }) => {

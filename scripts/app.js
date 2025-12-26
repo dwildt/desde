@@ -15,11 +15,7 @@ const INITIAL_HABITS = [
   },
   {
     name: 'Exercícios Físicos',
-    startDate: '2025-12-26'
-  },
-  {
-    name: 'Ler livros',
-    startDate: '2025-12-26'
+    startDate: '2025-12-21'
   }
 ];
 

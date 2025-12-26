@@ -36,7 +36,7 @@ class WelcomeModal {
             <div class="welcome-section">
               <h3>🗑️ Hábitos de Exemplo</h3>
               <p>
-                Os 4 hábitos que você está vendo são apenas <strong>exemplos</strong>.
+                Os 3 hábitos que você está vendo são apenas <strong>exemplos</strong>.
                 Você pode deletá-los clicando no ícone 🗑️ em cada card.
               </p>
             </div>

@@ -231,12 +231,11 @@ Veja [CONTRIBUTING.md](CONTRIBUTING.md) para detalhes sobre como contribuir com 
 
 ## 📋 Hábitos Pré-cadastrados
 
-A aplicação vem com 4 hábitos de exemplo (carregados na primeira execução):
+A aplicação vem com 3 hábitos de exemplo (carregados apenas na primeira execução, se não houver dados salvos):
 
 1. **Escrevendo** - desde 01/01/2024
 2. **Codando** - desde 07/08/2025
-3. **Exercícios Físicos** - desde 26/12/2025
-4. **Ler livros** - desde 26/12/2025
+3. **Exercícios Físicos** - desde 21/12/2025
 
 Você pode deletá-los e adicionar os seus próprios!
 
