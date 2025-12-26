@@ -21,6 +21,12 @@ class Header {
                 onClick: 'AddHabitModal.open()',
                 ariaLabel: 'Adicionar novo hábito'
               })}
+              ${Button.render({
+                text: '💾',
+                variant: 'secondary',
+                onClick: 'ImportExportModal.open()',
+                ariaLabel: 'Importar ou Exportar dados'
+              })}
               ${ThemeToggle.render()}
             </div>
           </div>
