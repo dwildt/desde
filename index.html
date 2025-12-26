@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Rastreador de hábitos - Desde quando você tem algum hábito?">
+  <meta name="keywords" content="hábitos, rastreamento, dias, motivação">
+  <meta name="author" content="Wildtech">
+
+  <title>Desde - Rastreador de Hábitos</title>
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📅</text></svg>">
+
+  <link rel="stylesheet" href="styles/variables.css">
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <h1>📅 Desde</h1>
+      <p class="subtitle">Desde quando você tem algum hábito?</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="habits-section">
+      <div id="habitsList" class="habits-list">
+        <!-- Cards serão renderizados aqui pelo JavaScript -->
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>Feito com 💖 por <a href="https://github.com/dwildt" target="_blank">Wildtech</a></p>
+    </div>
+  </footer>
+
+  <script>
+    // Dados pré-carregados
+    const habits = [
+      {
+        name: 'Escrevendo',
+        startDate: '2024-01-01'
+      },
+      {
+        name: 'Codando',
+        startDate: '2025-08-07'
+      },
+      {
+        name: 'Exercícios Físicos',
+        startDate: '2025-12-26'
+      },
+      {
+        name: 'Ler livros',
+        startDate: '2025-12-26'
+      }
+    ];
+
+    // Função para calcular dias desde a data inicial
+    function calculateDaysSince(startDate) {
+      const start = new Date(startDate);
+      const today = new Date();
+      const diffTime = Math.abs(today - start);
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      return diffDays;
+    }
+
+    // Função para formatar data em português
+    function formatDate(dateString) {
+      const date = new Date(dateString);
+      const day = date.getDate().toString().padStart(2, '0');
+      const months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+                      'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+      const month = months[date.getMonth()];
+      const year = date.getFullYear();
+      return `${day} de ${month} de ${year}`;
+    }
+
+    // Renderizar cards de hábitos
+    function renderHabits() {
+      const habitsList = document.getElementById('habitsList');
+
+      habitsList.innerHTML = habits.map(habit => {
+        const days = calculateDaysSince(habit.startDate);
+        const formattedDate = formatDate(habit.startDate);
+        const daysLabel = days === 1 ? 'Dia' : 'Dias';
+
+        return `
+          <div class="habit-card">
+            <h3 class="habit-name">${habit.name}</h3>
+            <p class="habit-since">Desde <strong>${formattedDate}</strong></p>
+            <div class="habit-days">
+              <span class="days-number">${days}</span>
+              <span class="days-label">${daysLabel} Total</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Renderizar ao carregar a página
+    document.addEventListener('DOMContentLoaded', renderHabits);
+  </script>
+</body>
+</html>

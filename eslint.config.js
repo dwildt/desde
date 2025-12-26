@@ -6,11 +6,13 @@ module.exports = [
       'node_modules/**',
       '**/*.config.js',
       'tests/setup.js',
-      'coverage/**'
+      'coverage/**',
+      'playwright-report/**',
+      'test-results/**'
     ]
   },
   {
-    files: ['**/*.js'],
+    files: ['scripts/**/*.js', 'components/**/*.js', 'tests/**/*.js', 'e2e/**/*.js'],
     ...js.configs.recommended,
     languageOptions: {
       ecmaVersion: 'latest',
