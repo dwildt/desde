@@ -85,6 +85,9 @@
       importExportModalHtml,
       welcomeModalHtml
     ].join('');
+
+    // CRÍTICO: Inicializar EventDelegation DEPOIS que o HTML foi renderizado
+    EventDelegation.init();
   </script>
 </body>
 </html>

@@ -17,6 +17,15 @@ class Button {
   }
 
   /**
+   * Converte camelCase para kebab-case
+   * @param {string} str - String em camelCase
+   * @returns {string} String em kebab-case
+   */
+  static toKebabCase(str) {
+    return str.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
+  }
+
+  /**
    * Renderiza um botão
    * @param {Object} options - Opções do botão
    * @param {string} options.text - Texto do botão
@@ -45,9 +54,10 @@ class Button {
     let dataAttrs = '';
     if (action) {
       dataAttrs = `data-action="${this.escapeHtml(action)}"`;
-      // Adicionar data-attributes extras
+      // Adicionar data-attributes extras (convertendo camelCase para kebab-case)
       Object.entries(actionData).forEach(([key, value]) => {
-        dataAttrs += ` data-${key}="${this.escapeHtml(String(value))}"`;
+        const kebabKey = this.toKebabCase(key);
+        dataAttrs += ` data-${kebabKey}="${this.escapeHtml(String(value))}"`;
       });
     } else if (onClick) {
       // Fallback para onClick (será removido nas próximas fases)
