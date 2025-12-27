@@ -41,11 +41,11 @@ class ImportExportModal {
                 Faça backup dos seus hábitos exportando para um arquivo JSON.
               </p>
               ${Button.render({
-                text: '📥 Baixar JSON',
-                variant: 'primary',
-                onClick: 'ImportExportModal.handleExport()',
-                ariaLabel: 'Exportar dados para JSON'
-              })}
+      text: '📥 Baixar JSON',
+      variant: 'primary',
+      onClick: 'ImportExportModal.handleExport()',
+      ariaLabel: 'Exportar dados para JSON'
+    })}
             </section>
 
             <!-- Divider -->
@@ -68,11 +68,11 @@ class ImportExportModal {
               />
 
               ${Button.render({
-                text: '📤 Selecionar Arquivo',
-                variant: 'secondary',
-                onClick: 'document.getElementById("importFileInput").click()',
-                ariaLabel: 'Selecionar arquivo JSON para importar'
-              })}
+      text: '📤 Selecionar Arquivo',
+      variant: 'secondary',
+      onClick: 'document.getElementById("importFileInput").click()',
+      ariaLabel: 'Selecionar arquivo JSON para importar'
+    })}
 
               <p id="importFileName" class="import-file-name" role="status" aria-live="polite"></p>
             </section>
@@ -80,11 +80,11 @@ class ImportExportModal {
 
           <div class="modal-footer">
             ${Button.render({
-              text: 'Fechar',
-              variant: 'secondary',
-              onClick: 'ImportExportModal.close()',
-              ariaLabel: 'Fechar modal'
-            })}
+      text: 'Fechar',
+      variant: 'secondary',
+      onClick: 'ImportExportModal.close()',
+      ariaLabel: 'Fechar modal'
+    })}
           </div>
         </div>
       </div>

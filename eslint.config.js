@@ -76,7 +76,9 @@ module.exports = [
       'no-console': 'off',
       'semi': ['error', 'always'],
       'quotes': ['error', 'single'],
-      'indent': 'off', // Desabilitado devido a template strings com HTML
+      'indent': ['error', 2, {
+        'ignoredNodes': ['TemplateLiteral']
+      }], // REATIVADO com exceção para template literals
       'no-trailing-spaces': 'error',
       'eol-last': ['error', 'always'],
       'no-redeclare': 'off',

@@ -11,6 +11,22 @@ class ConfirmDialog {
    * @returns {string} HTML do modal
    */
   static render() {
+    // Extrair botões para variáveis ANTES do template
+    const cancelButton = Button.render({
+      text: 'Cancelar',
+      variant: 'secondary',
+      action: 'close-modal',
+      actionData: { modalId: 'confirmDialog' },
+      ariaLabel: 'Cancelar exclusão do hábito'
+    });
+
+    const deleteButton = Button.render({
+      text: 'Deletar',
+      variant: 'danger',
+      action: 'confirm-delete-habit',
+      ariaLabel: 'Confirmar exclusão do hábito'
+    });
+
     return `
       <div
         id="confirmDialog"
@@ -21,13 +37,14 @@ class ConfirmDialog {
         aria-describedby="confirmMessage"
         aria-modal="true"
       >
-        <div class="modal-overlay" onclick="ConfirmDialog.close()"></div>
+        <div class="modal-overlay" data-action="close-modal" data-modal-id="confirmDialog"></div>
         <div class="modal-content">
           <div class="modal-header">
             <h2 id="confirmDialogTitle">Confirmar Exclusão</h2>
             <button
               class="modal-close"
-              onclick="ConfirmDialog.close()"
+              data-action="close-modal"
+              data-modal-id="confirmDialog"
               aria-label="Fechar modal de confirmação"
               data-tooltip="Fechar"
               tabindex="0"
@@ -41,22 +58,21 @@ class ConfirmDialog {
           </div>
 
           <div class="modal-footer">
-            ${Button.render({
-              text: 'Cancelar',
-              variant: 'secondary',
-              onClick: 'ConfirmDialog.close()',
-              ariaLabel: 'Cancelar exclusão do hábito'
-            })}
-            ${Button.render({
-              text: 'Deletar',
-              variant: 'danger',
-              onClick: 'ConfirmDialog.confirm()',
-              ariaLabel: 'Confirmar exclusão do hábito'
-            })}
+            ${cancelButton}
+            ${deleteButton}
           </div>
         </div>
       </div>
     `;
+  }
+
+  /**
+   * Inicializa event handlers
+   */
+  static init() {
+    EventDelegation.register('[data-action="confirm-delete-habit"]', 'click', () => {
+      ConfirmDialog.confirm();
+    });
   }
 
   /**

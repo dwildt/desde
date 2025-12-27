@@ -5,26 +5,57 @@
 
 class FormField {
   /**
-   * Renderiza um campo de formulário
+   * Escapa HTML para prevenir XSS
+   * @param {string} str - String para escapar
+   * @returns {string} String escapada
+   */
+  static escapeHtml(str) {
+    if (!str) return '';
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  /**
+   * Renderiza um campo de formulário (versão desacoplada)
    * @param {Object} options - Opções do campo
    * @param {string} options.id - ID do input
    * @param {string} options.label - Label do campo
-   * @param {string} options.type - Tipo do input
-   * @param {string} options.name - Nome do input
-   * @param {string} options.value - Valor inicial
-   * @param {string} options.placeholder - Placeholder
-   * @param {boolean} options.required - Se é obrigatório
-   * @param {string} options.min - Valor mínimo (para date/number)
-   * @param {string} options.max - Valor máximo (para date/number)
+   * @param {string} options.inputHtml - HTML do input já renderizado
+   * @param {string} options.helpText - Texto de ajuda (opcional)
    * @returns {string} HTML do campo
    */
-  static render({ id, label, type, name, value = '', placeholder = '', required = false, min = '', max = '' }) {
-    const fieldId = id || name;
+  static render({ id, label, inputHtml, helpText = '' }) {
+    const escapedId = this.escapeHtml(id);
+    const escapedLabel = this.escapeHtml(label);
+    const escapedHelpText = this.escapeHtml(helpText);
+
     return `
       <div class="form-field">
-        <label for="${fieldId}" class="form-label">${label}</label>
-        ${Input.render({ id: fieldId, type, name: name || fieldId, value, placeholder, required, min, max })}
+        <label for="${escapedId}" class="form-label">${escapedLabel}</label>
+        ${inputHtml}
+        ${escapedHelpText ? `<span class="form-help">${escapedHelpText}</span>` : ''}
       </div>
     `;
+  }
+
+  /**
+   * Renderiza um campo de formulário (versão legada - retrocompatibilidade)
+   * @deprecated Use render() com inputHtml
+   */
+  static renderLegacy({ id, label, type, name, value = '', placeholder = '', required = false, min = '', max = '' }) {
+    const fieldId = id || name;
+    const inputHtml = Input.render({
+      id: fieldId,
+      type,
+      name: name || fieldId,
+      value,
+      placeholder,
+      required,
+      min,
+      max
+    });
+
+    return this.render({ id: fieldId, label, inputHtml });
   }
 }

@@ -12,7 +12,7 @@ class ThemeToggle {
     return `
       <button
         class="theme-toggle"
-        onclick="toggleTheme()"
+        data-action="toggle-theme"
         aria-label="Alternar entre tema claro e escuro"
         data-tooltip="Alternar tema"
         tabindex="0"

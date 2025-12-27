@@ -187,6 +187,9 @@ function initializeEventListeners() {
     const habitName = this.dataset.habitName;
     ConfirmDialog.open(habitId, habitName);
   });
+
+  // Event delegation: Handler para alternar tema
+  EventDelegation.register('[data-action="toggle-theme"]', 'click', toggleTheme);
 }
 
 /**
@@ -198,6 +201,14 @@ document.addEventListener('DOMContentLoaded', () => {
   renderApp();
   updateThemeIcon();
   initializeEventListeners();
+
+  // Inicializar modais
+  if (typeof ConfirmDialog !== 'undefined') {
+    ConfirmDialog.init();
+  }
+  if (typeof AddHabitModal !== 'undefined') {
+    AddHabitModal.init();
+  }
 
   // Verificar se é a primeira visita e mostrar modal de boas-vindas
   if (typeof WelcomeModal !== 'undefined') {

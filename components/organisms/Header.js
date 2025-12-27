@@ -9,25 +9,34 @@ class Header {
    * @returns {string} HTML do header
    */
   static render() {
+    // Extrair botões para variáveis ANTES do template
+    const addHabitButton = Button.render({
+      text: '+ Adicionar Hábito',
+      variant: 'primary',
+      action: 'open-modal',
+      actionData: { modalId: 'addHabitModal' },
+      ariaLabel: 'Adicionar novo hábito'
+    });
+
+    const importExportButton = Button.render({
+      text: '💾',
+      variant: 'secondary',
+      action: 'open-modal',
+      actionData: { modalId: 'importExportModal' },
+      ariaLabel: 'Importar ou Exportar dados'
+    });
+
+    const themeToggle = ThemeToggle.render();
+
     return `
       <header class="header" role="banner">
         <div class="container">
           <div class="header-content">
             <h1>🗓️ Desde</h1>
             <nav class="header-actions" role="navigation" aria-label="Ações principais">
-              ${Button.render({
-                text: '+ Adicionar Hábito',
-                variant: 'primary',
-                onClick: 'AddHabitModal.open()',
-                ariaLabel: 'Adicionar novo hábito'
-              })}
-              ${Button.render({
-                text: '💾',
-                variant: 'secondary',
-                onClick: 'ImportExportModal.open()',
-                ariaLabel: 'Importar ou Exportar dados'
-              })}
-              ${ThemeToggle.render()}
+              ${addHabitButton}
+              ${importExportButton}
+              ${themeToggle}
             </nav>
           </div>
         </div>

@@ -71,11 +71,11 @@ class WelcomeModal {
 
           <div class="modal-footer">
             ${Button.render({
-              text: 'Entendi, vamos começar!',
-              variant: 'primary',
-              onClick: 'WelcomeModal.close()',
-              ariaLabel: 'Fechar modal de boas-vindas e começar a usar'
-            })}
+      text: 'Entendi, vamos começar!',
+      variant: 'primary',
+      onClick: 'WelcomeModal.close()',
+      ariaLabel: 'Fechar modal de boas-vindas e começar a usar'
+    })}
           </div>
         </div>
       </div>
