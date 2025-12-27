@@ -9,7 +9,11 @@ test.describe('Fluxo Principal de Hábitos', () => {
   test.beforeEach(async ({ page }) => {
     // Limpar localStorage antes de cada teste
     await page.goto('http://localhost:3000');
-    await page.evaluate(() => localStorage.clear());
+    await page.evaluate(() => {
+      localStorage.clear();
+      // Marcar como já visitado para não mostrar o WelcomeModal
+      localStorage.setItem('desde-has-visited', 'true');
+    });
     await page.reload();
   });
 
@@ -74,8 +78,8 @@ test.describe('Fluxo Principal de Hábitos', () => {
     // Clicar no botão de deletar
     await page.locator('.habit-delete-btn').first().click();
 
-    // Cancelar deleção
-    await page.click('button:has-text("Cancelar")');
+    // Cancelar deleção (usar seletor específico do modal de confirmação)
+    await page.locator('#confirmDialog button:has-text("Cancelar")').click();
 
     // Verificar que nenhum hábito foi removido
     const newCount = await page.locator('.habit-card').count();

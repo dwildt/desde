@@ -9,7 +9,11 @@ test.describe('Tema Dark/Light', () => {
   test.beforeEach(async ({ page }) => {
     // Limpar localStorage antes de cada teste
     await page.goto('http://localhost:3000');
-    await page.evaluate(() => localStorage.clear());
+    await page.evaluate(() => {
+      localStorage.clear();
+      // Marcar como já visitado para não mostrar o WelcomeModal
+      localStorage.setItem('desde-has-visited', 'true');
+    });
     await page.reload();
   });
 
