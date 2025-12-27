@@ -9,6 +9,29 @@ class ImportExportModal {
    * @returns {string} HTML do modal
    */
   static render() {
+    // Extrair botões para variáveis ANTES do template
+    const exportButton = Button.render({
+      text: '📥 Baixar JSON',
+      variant: 'primary',
+      action: 'export-data',
+      ariaLabel: 'Exportar dados para JSON'
+    });
+
+    const selectFileButton = Button.render({
+      text: '📤 Selecionar Arquivo',
+      variant: 'secondary',
+      action: 'select-import-file',
+      ariaLabel: 'Selecionar arquivo JSON para importar'
+    });
+
+    const closeButton = Button.render({
+      text: 'Fechar',
+      variant: 'secondary',
+      action: 'close-modal',
+      actionData: { modalId: 'importExportModal' },
+      ariaLabel: 'Fechar modal'
+    });
+
     return `
       <div
         id="importExportModal"
@@ -18,13 +41,14 @@ class ImportExportModal {
         aria-labelledby="importExportModalTitle"
         aria-modal="true"
       >
-        <div class="modal-overlay" onclick="ImportExportModal.close()"></div>
+        <div class="modal-overlay" data-action="close-modal" data-modal-id="importExportModal"></div>
         <div class="modal-content">
           <div class="modal-header">
             <h2 id="importExportModalTitle">Importar / Exportar Dados</h2>
             <button
               class="modal-close"
-              onclick="ImportExportModal.close()"
+              data-action="close-modal"
+              data-modal-id="importExportModal"
               aria-label="Fechar modal de importar/exportar"
               data-tooltip="Fechar"
               tabindex="0"
@@ -40,12 +64,7 @@ class ImportExportModal {
               <p class="section-description">
                 Faça backup dos seus hábitos exportando para um arquivo JSON.
               </p>
-              ${Button.render({
-      text: '📥 Baixar JSON',
-      variant: 'primary',
-      onClick: 'ImportExportModal.handleExport()',
-      ariaLabel: 'Exportar dados para JSON'
-    })}
+              ${exportButton}
             </section>
 
             <!-- Divider -->
@@ -63,32 +82,44 @@ class ImportExportModal {
                 id="importFileInput"
                 accept=".json"
                 style="display: none;"
-                onchange="ImportExportModal.handleFileSelect(event)"
                 aria-label="Selecionar arquivo JSON"
               />
 
-              ${Button.render({
-      text: '📤 Selecionar Arquivo',
-      variant: 'secondary',
-      onClick: 'document.getElementById("importFileInput").click()',
-      ariaLabel: 'Selecionar arquivo JSON para importar'
-    })}
+              ${selectFileButton}
 
               <p id="importFileName" class="import-file-name" role="status" aria-live="polite"></p>
             </section>
           </div>
 
           <div class="modal-footer">
-            ${Button.render({
-      text: 'Fechar',
-      variant: 'secondary',
-      onClick: 'ImportExportModal.close()',
-      ariaLabel: 'Fechar modal'
-    })}
+            ${closeButton}
           </div>
         </div>
       </div>
     `;
+  }
+
+  /**
+   * Inicializa event handlers
+   */
+  static init() {
+    // Handler para exportar dados
+    EventDelegation.register('[data-action="export-data"]', 'click', () => {
+      ImportExportModal.handleExport();
+    });
+
+    // Handler para selecionar arquivo
+    EventDelegation.register('[data-action="select-import-file"]', 'click', () => {
+      document.getElementById('importFileInput')?.click();
+    });
+
+    // Handler para mudança de arquivo
+    const fileInput = document.getElementById('importFileInput');
+    if (fileInput) {
+      fileInput.addEventListener('change', (e) => {
+        ImportExportModal.handleFileSelect(e);
+      });
+    }
   }
 
   /**

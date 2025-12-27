@@ -209,6 +209,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (typeof AddHabitModal !== 'undefined') {
     AddHabitModal.init();
   }
+  if (typeof ImportExportModal !== 'undefined') {
+    ImportExportModal.init();
+  }
 
   // Verificar se é a primeira visita e mostrar modal de boas-vindas
   if (typeof WelcomeModal !== 'undefined') {

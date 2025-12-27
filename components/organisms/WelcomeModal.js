@@ -9,6 +9,15 @@ class WelcomeModal {
    * @returns {string} HTML do modal
    */
   static render() {
+    // Extrair botão para variável ANTES do template
+    const startButton = Button.render({
+      text: 'Entendi, vamos começar!',
+      variant: 'primary',
+      action: 'close-modal',
+      actionData: { modalId: 'welcomeModal' },
+      ariaLabel: 'Fechar modal de boas-vindas e começar a usar'
+    });
+
     return `
       <div
         id="welcomeModal"
@@ -70,12 +79,7 @@ class WelcomeModal {
           </div>
 
           <div class="modal-footer">
-            ${Button.render({
-      text: 'Entendi, vamos começar!',
-      variant: 'primary',
-      onClick: 'WelcomeModal.close()',
-      ariaLabel: 'Fechar modal de boas-vindas e começar a usar'
-    })}
+            ${startButton}
           </div>
         </div>
       </div>
