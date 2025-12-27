@@ -64,6 +64,7 @@ module.exports = [
         AddHabitModal: 'readonly',
         ImportExportModal: 'readonly',
         WelcomeModal: 'readonly',
+        EventDelegation: 'readonly',
 
         // Funções globais (app.js)
         toggleTheme: 'readonly'

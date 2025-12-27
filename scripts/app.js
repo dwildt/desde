@@ -180,6 +180,13 @@ function initializeEventListeners() {
 
   // Listener para importar dados
   window.addEventListener('data:import', handleImport);
+
+  // Event delegation: Handler para confirmar deleção de hábito
+  EventDelegation.register('[data-action="confirm-delete"]', 'click', function() {
+    const habitId = this.dataset.habitId;
+    const habitName = this.dataset.habitName;
+    ConfirmDialog.open(habitId, habitName);
+  });
 }
 
 /**
