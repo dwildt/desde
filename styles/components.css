@@ -2,7 +2,11 @@
 
 /* Button */
 .button {
-  padding: var(--spacing-sm) var(--spacing-lg);
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--spacing-lg);
   border: none;
   border-radius: var(--border-radius-sm);
   font-family: var(--font-family);
@@ -24,6 +28,11 @@
 .button-primary {
   background: var(--gradient-wildtech);
   color: white;
+  box-shadow: 0 2px 8px rgba(255, 123, 0, 0.3);
+}
+
+.button-primary:hover {
+  box-shadow: 0 4px 12px rgba(255, 123, 0, 0.4);
 }
 
 .button-secondary {
@@ -212,7 +221,8 @@
   background: var(--surface);
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius-md);
-  padding: var(--spacing-xs) var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-sm);
+  height: 40px;
 }
 
 .sort-label {
