@@ -124,10 +124,10 @@ class Storage {
   static getSettings() {
     try {
       const data = localStorage.getItem(this.KEYS.SETTINGS);
-      return data ? JSON.parse(data) : { theme: 'light', language: 'pt' };
+      return data ? JSON.parse(data) : { theme: 'light', language: 'pt', viewMode: 'grid' };
     } catch (error) {
       console.error('Erro ao carregar configurações:', error);
-      return { theme: 'light', language: 'pt' };
+      return { theme: 'light', language: 'pt', viewMode: 'grid' };
     }
   }
 

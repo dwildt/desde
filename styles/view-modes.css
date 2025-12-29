@@ -1,0 +1,186 @@
+/**
+ * view-modes.css
+ * Estilos para modos de visualização (Grid e Lista)
+ */
+
+/* ========================================
+   VIEW MODE TOGGLE
+   ======================================== */
+
+.view-mode-toggle {
+  display: flex;
+  gap: var(--spacing-xs);
+  background: var(--surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-xs);
+}
+
+.view-mode-btn {
+  background: transparent;
+  border: none;
+  border-radius: var(--border-radius-sm);
+  padding: var(--spacing-xs);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+}
+
+.view-mode-btn:hover {
+  background: var(--background);
+  color: var(--text-primary);
+}
+
+.view-mode-btn:focus {
+  outline: 2px solid var(--primary-orange);
+  outline-offset: 2px;
+}
+
+.view-mode-btn.active {
+  background: var(--primary-orange);
+  color: white;
+}
+
+.view-mode-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ========================================
+   MODO GRID (Padrão)
+   ======================================== */
+
+.habits-list.mode-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+/* Card em modo grid - já definido em main.css */
+
+/* ========================================
+   MODO LISTA COMPACTA
+   ======================================== */
+
+.habits-list.mode-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.habits-list.mode-list .habit-card {
+  padding: var(--spacing-md) var(--spacing-lg);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    "header days"
+    "since days";
+  gap: var(--spacing-sm) var(--spacing-lg);
+  align-items: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-left-color 0.2s ease;
+}
+
+.habits-list.mode-list .habit-card:hover {
+  transform: translateX(4px);
+}
+
+.habits-list.mode-list .habit-card-header {
+  grid-area: header;
+  margin-bottom: 0;
+  align-items: center;
+}
+
+.habits-list.mode-list .habit-name {
+  font-size: var(--font-size-lg);
+}
+
+.habits-list.mode-list .habit-since {
+  grid-area: since;
+  margin-bottom: 0;
+  font-size: var(--font-size-xs);
+}
+
+.habits-list.mode-list .habit-days {
+  grid-area: days;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-md);
+  margin-top: 0;
+  min-width: 100px;
+}
+
+.habits-list.mode-list .days-number {
+  font-size: var(--font-size-2xl);
+  line-height: 1;
+}
+
+.habits-list.mode-list .days-label {
+  font-size: var(--font-size-xs);
+  text-align: center;
+}
+
+.habits-list.mode-list .habit-delete-btn {
+  font-size: var(--font-size-md);
+}
+
+/* ========================================
+   RESPONSIVIDADE - MODO LISTA
+   ======================================== */
+
+@media (max-width: 768px) {
+  .view-mode-toggle {
+    padding: 4px;
+  }
+
+  .view-mode-btn {
+    width: 32px;
+    height: 32px;
+  }
+
+  .view-mode-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* Lista vira modo card em mobile */
+  .habits-list.mode-list .habit-card {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "header"
+      "since"
+      "days";
+    gap: var(--spacing-sm);
+  }
+
+  .habits-list.mode-list .habit-days {
+    flex-direction: row;
+    justify-content: center;
+    min-width: auto;
+    width: 100%;
+  }
+
+  .habits-list.mode-list .days-number {
+    font-size: 2.5rem;
+  }
+
+  .habits-list.mode-list .days-label {
+    font-size: var(--font-size-sm);
+  }
+
+  .habits-list.mode-list .habit-card:hover {
+    transform: translateY(-2px);
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 480px) {
+  .habits-list.mode-list .days-number {
+    font-size: 2rem;
+  }
+}

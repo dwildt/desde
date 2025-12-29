@@ -197,6 +197,7 @@ function initializeEventListeners() {
  */
 document.addEventListener('DOMContentLoaded', () => {
   Theme.init();
+  ViewMode.init();
   initializeData();
   renderApp();
   updateThemeIcon();

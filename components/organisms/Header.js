@@ -26,6 +26,7 @@ class Header {
       ariaLabel: 'Importar ou Exportar dados'
     });
 
+    const viewModeToggle = ViewModeToggle.render();
     const themeToggle = ThemeToggle.render();
 
     return `
@@ -36,6 +37,7 @@ class Header {
             <nav class="header-actions" role="navigation" aria-label="Ações principais">
               ${addHabitButton}
               ${importExportButton}
+              ${viewModeToggle}
               ${themeToggle}
             </nav>
           </div>

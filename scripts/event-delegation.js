@@ -44,6 +44,12 @@ class EventDelegation {
       if (modalId === 'addHabitModal') AddHabitModal.open();
       if (modalId === 'importExportModal') ImportExportModal.open();
     });
+
+    // Handler para trocar modo de visualização
+    this.register('[data-action="set-view-mode"]', 'click', function() {
+      const mode = this.dataset.mode;
+      ViewMode.setMode(mode);
+    });
   }
 
   /**
