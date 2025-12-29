@@ -32,7 +32,12 @@ class HabitCard {
     const escapedFormattedDate = this.escapeHtml(formattedDate);
 
     return `
-      <article class="habit-card" role="article" aria-labelledby="habit-name-${escapedId}">
+      <article
+        class="habit-card"
+        role="article"
+        aria-labelledby="habit-name-${escapedId}"
+        aria-describedby="habit-days-${escapedId}"
+      >
         <div class="habit-card-header">
           <h3 id="habit-name-${escapedId}" class="habit-name">${escapedName}</h3>
           <button
@@ -44,13 +49,21 @@ class HabitCard {
             data-tooltip="Deletar hábito"
             tabindex="0"
           >
-            🗑️
+            <span aria-hidden="true">🗑️</span>
           </button>
         </div>
-        <p class="habit-since">Desde <strong>${escapedFormattedDate}</strong></p>
-        <div class="habit-days" aria-live="polite">
-          <span class="days-number" aria-label="${days} ${daysLabel.toLowerCase()}">${days}</span>
-          <span class="days-label">${daysLabel} Total</span>
+        <p class="habit-since">
+          <span class="habit-since-label">Desde</span>
+          <strong>${escapedFormattedDate}</strong>
+        </p>
+        <div
+          id="habit-days-${escapedId}"
+          class="habit-days"
+          role="status"
+          aria-live="polite"
+        >
+          <span class="days-number">${days}</span>
+          <span class="days-label" aria-label="${days} ${daysLabel.toLowerCase()} total">${daysLabel}</span>
         </div>
       </article>
     `;
