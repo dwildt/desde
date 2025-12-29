@@ -248,6 +248,11 @@ function initializeEventListeners() {
   EventDelegation.register('[data-action="share-story"]', 'click', function() {
     StoryView.shareStory();
   });
+
+  // Event delegation: Handler para download story
+  EventDelegation.register('[data-action="download-story"]', 'click', function() {
+    StoryView.downloadStory();
+  });
 }
 
 /**

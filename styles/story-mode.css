@@ -298,44 +298,45 @@
   letter-spacing: 0.3px;
 }
 
-/* Barra de Ações */
+/* Barra de Ações Lateral */
 .story-actions {
   position: absolute;
-  bottom: 80px;
-  left: 50%;
-  transform: translateX(-50%);
+  right: -80px;
+  top: 50%;
+  transform: translateY(-50%);
   display: flex;
+  flex-direction: column;
   gap: var(--spacing-md);
   z-index: 10003;
 }
 
 .story-action-btn {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: var(--spacing-xs);
+  justify-content: center;
   padding: var(--spacing-md);
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(10px);
   border: 2px solid rgba(255, 255, 255, 0.3);
-  border-radius: var(--border-radius-lg);
+  border-radius: 50%;
   color: white;
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-semibold);
   cursor: pointer;
   transition: all 0.3s ease;
-  min-width: 100px;
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
 }
 
 .story-action-btn:hover {
   background: rgba(255, 255, 255, 0.25);
   border-color: rgba(255, 255, 255, 0.5);
-  transform: translateY(-2px);
+  transform: scale(1.1);
 }
 
 .story-action-btn svg {
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
 }
 
 /* Animações */
@@ -387,13 +388,19 @@
   }
 
   .story-actions {
-    bottom: 60px;
+    right: var(--spacing-md);
     gap: var(--spacing-sm);
   }
 
   .story-action-btn {
-    min-width: 80px;
-    padding: var(--spacing-sm) var(--spacing-md);
+    width: 48px;
+    height: 48px;
+    padding: var(--spacing-sm);
+  }
+
+  .story-action-btn svg {
+    width: 24px;
+    height: 24px;
   }
 }
 
@@ -411,7 +418,17 @@
   }
 
   .story-actions {
-    bottom: 40px;
+    right: var(--spacing-sm);
+  }
+
+  .story-action-btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .story-action-btn svg {
+    width: 22px;
+    height: 22px;
   }
 }
 

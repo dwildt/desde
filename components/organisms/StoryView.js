@@ -42,7 +42,7 @@ class StoryView {
             <!-- Será preenchido dinamicamente -->
           </div>
 
-          <!-- Barra de ações -->
+          <!-- Barra de ações laterais -->
           <div class="story-actions">
             <button
               class="story-action-btn"
@@ -50,12 +50,24 @@ class StoryView {
               aria-label="Compartilhar story"
               title="Compartilhar"
             >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 <polyline points="16 6 12 2 8 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 <line x1="12" y1="2" x2="12" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
-              <span>Compartilhar</span>
+            </button>
+
+            <button
+              class="story-action-btn"
+              data-action="download-story"
+              aria-label="Salvar imagem"
+              title="Salvar imagem"
+            >
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <polyline points="7 10 12 15 17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <line x1="12" y1="15" x2="12" y2="3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
             </button>
 
             <button
@@ -64,11 +76,10 @@ class StoryView {
               aria-label="Fechar visualização"
               title="Fechar (ESC)"
             >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <line x1="18" y1="6" x2="6" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 <line x1="6" y1="6" x2="18" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
-              <span>Fechar</span>
             </button>
           </div>
         </div>
@@ -343,6 +354,21 @@ class StoryView {
     } else {
       alert('Compartilhamento não disponível neste navegador');
     }
+  }
+
+  /**
+   * Salva o story como imagem (placeholder para futura implementação com html2canvas)
+   */
+  static downloadStory() {
+    if (!this.habits || this.habits.length === 0) return;
+
+    const habit = this.habits[this.currentIndex];
+    const days = HabitUtils.calculateDaysSince(habit.startDate);
+
+    // Placeholder - futura implementação com html2canvas
+    alert(`📸 Funcionalidade de download em desenvolvimento!\n\nPor enquanto, você pode:\n• Tirar um screenshot da tela (Print Screen)\n• Usar a ferramenta de recorte do seu sistema\n\nHábito: ${habit.name}\nDias: ${days}`);
+
+    console.log('Download story - Em desenvolvimento. Use html2canvas para implementar.');
   }
 
   /**
