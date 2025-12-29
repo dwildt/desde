@@ -6,6 +6,24 @@
   --primary-brown: #8b4513;
   --gradient-wildtech: linear-gradient(135deg, #ff7b00 0%, #8b4513 100%);
 
+  /* Milestones - Progressão Quente → Frio (Fibonacci) */
+  --milestone-bronze: #ff7b00;      /* 7 dias - Laranja (brand) */
+  --milestone-silver: #ff5722;      /* 30 dias - Laranja-vermelho */
+  --milestone-gold: #e91e63;        /* 90 dias - Vermelho-rosa */
+  --milestone-platinum: #9c27b0;    /* 180 dias - Roxo */
+  --milestone-diamond: #673ab7;     /* 365 dias - Roxo-índigo */
+  --milestone-sapphire: #3f51b5;    /* 730 dias - Índigo */
+  --milestone-infinity: #2196f3;    /* 1095+ dias - Azul */
+
+  /* Gradientes para badges de marcos */
+  --gradient-bronze: linear-gradient(135deg, #ff7b00 0%, #ff9800 100%);
+  --gradient-silver: linear-gradient(135deg, #ff5722 0%, #ff7043 100%);
+  --gradient-gold: linear-gradient(135deg, #e91e63 0%, #f06292 100%);
+  --gradient-platinum: linear-gradient(135deg, #9c27b0 0%, #ba68c8 100%);
+  --gradient-diamond: linear-gradient(135deg, #673ab7 0%, #9575cd 100%);
+  --gradient-sapphire: linear-gradient(135deg, #3f51b5 0%, #7986cb 100%);
+  --gradient-infinity: linear-gradient(135deg, #2196f3 0%, #64b5f6 100%);
+
   /* Cores Base - Light Mode */
   --background: #f5f7fa;
   --surface: #ffffff;

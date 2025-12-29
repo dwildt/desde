@@ -31,6 +31,36 @@ class HabitCard {
     const escapedId = this.escapeHtml(habit.id);
     const escapedFormattedDate = this.escapeHtml(formattedDate);
 
+    // Obter marco atual e próximo
+    const currentMilestone = Milestones.getCurrentMilestone(days);
+    const nextMilestone = Milestones.getNextMilestone(days);
+
+    // Badge de marco
+    const milestoneBadge = `
+      <div class="milestone-badge ${currentMilestone.color}" aria-label="Marco ${currentMilestone.name}">
+        <span class="milestone-icon" aria-hidden="true">${currentMilestone.icon}</span>
+        <span class="milestone-label">${currentMilestone.name}</span>
+      </div>
+    `;
+
+    // Barra de progresso (só mostra se não atingiu o último marco)
+    const progressBar = nextMilestone ? `
+      <div class="milestone-progress">
+        <div class="milestone-progress-bar">
+          <div
+            class="milestone-progress-fill ${nextMilestone.tier.color}"
+            style="width: ${nextMilestone.progress}%"
+            role="progressbar"
+            aria-valuenow="${nextMilestone.progress}"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-label="Progresso para ${nextMilestone.tier.name}: ${nextMilestone.progress}%"
+          ></div>
+        </div>
+        <p class="milestone-progress-text">${Milestones.getProgressText(days)}</p>
+      </div>
+    ` : '';
+
     return `
       <article
         class="habit-card"
@@ -52,6 +82,7 @@ class HabitCard {
             <span aria-hidden="true">🗑️</span>
           </button>
         </div>
+        ${milestoneBadge}
         <p class="habit-since">
           <span class="habit-since-label">Desde</span>
           <strong>${escapedFormattedDate}</strong>
@@ -61,10 +92,12 @@ class HabitCard {
           class="habit-days"
           role="status"
           aria-live="polite"
+          style="background: ${currentMilestone.gradient}"
         >
           <span class="days-number">${days}</span>
           <span class="days-label" aria-label="${days} ${daysLabel.toLowerCase()} total">${daysLabel}</span>
         </div>
+        ${progressBar}
       </article>
     `;
   }
