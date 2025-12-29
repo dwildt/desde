@@ -177,7 +177,7 @@ class StoryView {
         <!-- Footer -->
         <div class="story-footer">
           <div class="story-branding">
-            <span class="story-app-icon">📅</span>
+            <span class="story-app-icon">🗓️</span>
             <span class="story-app-name">Desde</span>
           </div>
         </div>
