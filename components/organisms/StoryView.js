@@ -178,7 +178,10 @@ class StoryView {
         <div class="story-footer">
           <div class="story-branding">
             <span class="story-app-icon">🗓️</span>
-            <span class="story-app-name">Desde</span>
+            <div class="story-branding-text">
+              <span class="story-app-name">Desde</span>
+              <span class="story-app-url">dwildt.github.io/desde</span>
+            </div>
           </div>
         </div>
       </div>

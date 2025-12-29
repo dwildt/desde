@@ -272,12 +272,30 @@
   background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10px);
   border-radius: var(--border-radius-lg);
-  font-weight: var(--font-weight-bold);
-  font-size: var(--font-size-lg);
 }
 
 .story-app-icon {
   font-size: var(--font-size-xl);
+  flex-shrink: 0;
+}
+
+.story-branding-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.story-app-name {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2;
+}
+
+.story-app-url {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  opacity: 0.9;
+  letter-spacing: 0.3px;
 }
 
 /* Barra de Ações */
