@@ -357,18 +357,102 @@ class StoryView {
   }
 
   /**
-   * Salva o story como imagem (placeholder para futura implementação com html2canvas)
+   * Salva o story como imagem PNG (1080x1920px)
    */
-  static downloadStory() {
+  static async downloadStory() {
     if (!this.habits || this.habits.length === 0) return;
 
     const habit = this.habits[this.currentIndex];
     const days = HabitUtils.calculateDaysSince(habit.startDate);
 
-    // Placeholder - futura implementação com html2canvas
-    alert(`📸 Funcionalidade de download em desenvolvimento!\n\nPor enquanto, você pode:\n• Tirar um screenshot da tela (Print Screen)\n• Usar a ferramenta de recorte do seu sistema\n\nHábito: ${habit.name}\nDias: ${days}`);
+    // Verificar se html2canvas está disponível
+    if (typeof html2canvas === 'undefined') {
+      alert('❌ Erro: html2canvas não está carregado. Recarregue a página e tente novamente.');
+      return;
+    }
 
-    console.log('Download story - Em desenvolvimento. Use html2canvas para implementar.');
+    const storyContent = document.getElementById('storyContent');
+    if (!storyContent) {
+      alert('❌ Erro: Conteúdo do story não encontrado.');
+      return;
+    }
+
+    try {
+      // Mostrar feedback visual
+      const originalCursor = document.body.style.cursor;
+      document.body.style.cursor = 'wait';
+
+      // Desabilitar botão temporariamente
+      const downloadBtn = document.querySelector('[data-action="download-story"]');
+      const originalBtnContent = downloadBtn ? downloadBtn.innerHTML : null;
+      if (downloadBtn) {
+        downloadBtn.disabled = true;
+        downloadBtn.style.opacity = '0.5';
+      }
+
+      // Capturar o story como canvas com alta qualidade
+      const canvas = await html2canvas(storyContent, {
+        scale: 2, // 2x resolution (540x960 -> 1080x1920)
+        backgroundColor: null,
+        logging: false,
+        useCORS: true,
+        allowTaint: true,
+        width: 540,
+        height: 960
+      });
+
+      // Converter canvas para blob PNG
+      canvas.toBlob((blob) => {
+        if (!blob) {
+          alert('❌ Erro ao gerar imagem. Tente novamente.');
+          return;
+        }
+
+        // Criar URL do blob
+        const url = URL.createObjectURL(blob);
+
+        // Criar link de download
+        const link = document.createElement('a');
+        const habitSlug = habit.name
+          .toLowerCase()
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '') // Remove acentos
+          .replace(/[^a-z0-9]+/g, '-') // Substitui caracteres especiais por hífen
+          .replace(/^-|-$/g, ''); // Remove hífens no início/fim
+
+        link.download = `desde-story-${habitSlug}-${days}dias.png`;
+        link.href = url;
+
+        // Fazer download
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        // Limpar URL
+        URL.revokeObjectURL(url);
+
+        // Restaurar UI
+        document.body.style.cursor = originalCursor;
+        if (downloadBtn) {
+          downloadBtn.disabled = false;
+          downloadBtn.style.opacity = '1';
+        }
+
+        console.log('✅ Story salvo com sucesso:', link.download);
+      }, 'image/png');
+
+    } catch (error) {
+      console.error('Erro ao gerar imagem do story:', error);
+      alert(`❌ Erro ao salvar imagem: ${error.message}\n\nTente usar a ferramenta de screenshot do seu sistema.`);
+
+      // Restaurar UI em caso de erro
+      document.body.style.cursor = 'default';
+      const downloadBtn = document.querySelector('[data-action="download-story"]');
+      if (downloadBtn) {
+        downloadBtn.disabled = false;
+        downloadBtn.style.opacity = '1';
+      }
+    }
   }
 
   /**
