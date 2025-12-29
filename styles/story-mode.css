@@ -44,8 +44,7 @@
 /* Navegação */
 .story-nav {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  bottom: -70px;
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(10px);
   border: 2px solid rgba(255, 255, 255, 0.3);
@@ -64,7 +63,7 @@
 .story-nav:hover:not(:disabled) {
   background: rgba(255, 255, 255, 0.25);
   border-color: rgba(255, 255, 255, 0.5);
-  transform: translateY(-50%) scale(1.1);
+  transform: scale(1.1);
 }
 
 .story-nav:disabled {
@@ -73,11 +72,11 @@
 }
 
 .story-nav-prev {
-  left: -70px;
+  left: 30%;
 }
 
 .story-nav-next {
-  right: -70px;
+  right: 30%;
 }
 
 /* Conteúdo do Story */
@@ -365,14 +364,15 @@
   .story-nav {
     width: 48px;
     height: 48px;
+    bottom: var(--spacing-md);
   }
 
   .story-nav-prev {
-    left: var(--spacing-md);
+    left: 20%;
   }
 
   .story-nav-next {
-    right: var(--spacing-md);
+    right: 20%;
   }
 
   .story-card {
@@ -415,6 +415,20 @@
 
   .story-habit-name {
     font-size: 1.5rem;
+  }
+
+  .story-nav {
+    width: 44px;
+    height: 44px;
+    bottom: var(--spacing-sm);
+  }
+
+  .story-nav-prev {
+    left: 15%;
+  }
+
+  .story-nav-next {
+    right: 15%;
   }
 
   .story-actions {
