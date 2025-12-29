@@ -298,14 +298,27 @@ main {
     page-break-inside: avoid;
     box-shadow: none;
     border: 1px solid #ddd;
+    transform: none !important;
+  }
+
+  .habit-card::before {
+    display: none !important;
+  }
+
+  .habit-card:hover {
+    transform: none !important;
+    box-shadow: none !important;
+    border-left-color: var(--primary-orange) !important;
   }
 
   .habits-list {
     gap: var(--spacing-md);
   }
 
-  /* Remover animações */
-  * {
+  /* Remover animações e transições */
+  *,
+  *::before,
+  *::after {
     animation: none !important;
     transition: none !important;
   }
@@ -319,6 +332,22 @@ main {
   .habit-days {
     background: #f0f0f0 !important;
     color: black !important;
+  }
+
+  /* Milestone badges na impressão */
+  .milestone-badge {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  .milestone-badge:hover {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  .milestone-progress-fill::after {
+    animation: none !important;
+    display: none !important;
   }
 
   /* Simplificar footer */
