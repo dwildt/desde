@@ -271,6 +271,8 @@ main {
 @media print {
   /* Ocultar elementos de ação */
   .theme-toggle,
+  .view-mode-toggle,
+  .sort-selector,
   .habit-delete-btn,
   button[aria-label*="Importar"],
   button[aria-label*="Exportar"],
