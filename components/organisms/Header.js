@@ -26,6 +26,7 @@ class Header {
       ariaLabel: 'Importar ou Exportar dados'
     });
 
+    const sortSelector = SortSelector.render();
     const viewModeToggle = ViewModeToggle.render();
     const themeToggle = ThemeToggle.render();
 
@@ -37,6 +38,7 @@ class Header {
             <nav class="header-actions" role="navigation" aria-label="Ações principais">
               ${addHabitButton}
               ${importExportButton}
+              ${sortSelector}
               ${viewModeToggle}
               ${themeToggle}
             </nav>

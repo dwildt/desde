@@ -7,14 +7,18 @@ class HabitList {
   /**
    * Renderiza a lista de hábitos
    * @param {Array} habits - Array de hábitos
+   * @param {string} sortBy - Critério de ordenação
    * @returns {string} HTML da lista
    */
-  static render(habits) {
+  static render(habits, sortBy = 'most-days') {
     if (!habits || habits.length === 0) {
       return this.renderEmptyState();
     }
 
-    const habitCards = habits.map(habit => {
+    // Ordenar hábitos conforme critério
+    const sortedHabits = HabitUtils.sortHabits(habits, sortBy);
+
+    const habitCards = sortedHabits.map(habit => {
       const days = HabitUtils.calculateDaysSince(habit.startDate);
       const formattedDate = HabitUtils.formatDate(habit.startDate);
       return HabitCard.render(habit, days, formattedDate);

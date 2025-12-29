@@ -89,4 +89,49 @@ class HabitUtils {
 
     return { years, months, days };
   }
+
+  /**
+   * Ordena hábitos conforme critério
+   * @param {Array} habits - Array de hábitos
+   * @param {string} sortBy - Critério (most-days, least-days, newest, alphabetical)
+   * @returns {Array} Hábitos ordenados
+   */
+  static sortHabits(habits, sortBy = 'most-days') {
+    const sorted = [...habits]; // Clone para não mutar original
+
+    switch (sortBy) {
+      case 'most-days':
+        // Maior tempo primeiro (mais dias)
+        return sorted.sort((a, b) => {
+          const daysA = this.calculateDaysSince(a.startDate);
+          const daysB = this.calculateDaysSince(b.startDate);
+          return daysB - daysA;
+        });
+
+      case 'least-days':
+        // Menor tempo primeiro (menos dias)
+        return sorted.sort((a, b) => {
+          const daysA = this.calculateDaysSince(a.startDate);
+          const daysB = this.calculateDaysSince(b.startDate);
+          return daysA - daysB;
+        });
+
+      case 'newest':
+        // Mais recente primeiro (por createdAt)
+        return sorted.sort((a, b) => {
+          const dateA = new Date(a.createdAt || 0);
+          const dateB = new Date(b.createdAt || 0);
+          return dateB - dateA;
+        });
+
+      case 'alphabetical':
+        // Ordem alfabética (A-Z)
+        return sorted.sort((a, b) => {
+          return a.name.localeCompare(b.name, 'pt-BR');
+        });
+
+      default:
+        return sorted;
+    }
+  }
 }

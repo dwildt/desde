@@ -37,10 +37,11 @@ function initializeData() {
  */
 function renderApp() {
   const habits = Storage.getHabits();
+  const settings = Storage.getSettings();
   const habitsList = document.getElementById('habitsList');
 
   if (habitsList) {
-    habitsList.innerHTML = HabitList.render(habits);
+    habitsList.innerHTML = HabitList.render(habits, settings.sortBy);
 
     // Adiciona classe para animações escalonadas
     habitsList.classList.add('loaded');
@@ -50,6 +51,9 @@ function renderApp() {
       habitsList.classList.remove('loaded');
     }, 1000);
   }
+
+  // Atualizar select de ordenação
+  updateSortSelect();
 }
 
 /**
@@ -68,6 +72,17 @@ function updateThemeIcon() {
   if (themeIcon) {
     const currentTheme = Theme.getTheme();
     themeIcon.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+  }
+}
+
+/**
+ * Atualiza select de ordenação
+ */
+function updateSortSelect() {
+  const sortSelect = document.getElementById('habitSort');
+  if (sortSelect) {
+    const settings = Storage.getSettings();
+    sortSelect.value = settings.sortBy || 'most-days';
   }
 }
 
@@ -166,6 +181,21 @@ function handleImport(event) {
 }
 
 /**
+ * Manipula mudança de ordenação
+ */
+function handleSortChange(event) {
+  const sortBy = event.target.value;
+
+  // Salvar preferência
+  const settings = Storage.getSettings();
+  settings.sortBy = sortBy;
+  Storage.saveSettings(settings);
+
+  // Re-renderizar com nova ordem
+  renderApp();
+}
+
+/**
  * Inicializa event listeners
  */
 function initializeEventListeners() {
@@ -190,6 +220,9 @@ function initializeEventListeners() {
 
   // Event delegation: Handler para alternar tema
   EventDelegation.register('[data-action="toggle-theme"]', 'click', toggleTheme);
+
+  // Event delegation: Handler para mudança de ordenação
+  EventDelegation.register('[data-action="change-sort"]', 'change', handleSortChange);
 }
 
 /**
