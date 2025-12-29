@@ -88,6 +88,19 @@ class StoryView {
     const nextMilestone = Milestones.getNextMilestone(days);
     const daysLabel = days === 1 ? 'Dia' : 'Dias';
 
+    // Mapeamento de cores para SVG gradient
+    const colorMap = {
+      'bronze': { start: '#ff7b00', end: '#ff9800' },
+      'silver': { start: '#ff5722', end: '#ff7043' },
+      'gold': { start: '#e91e63', end: '#f06292' },
+      'platinum': { start: '#9c27b0', end: '#ba68c8' },
+      'diamond': { start: '#673ab7', end: '#9575cd' },
+      'sapphire': { start: '#3f51b5', end: '#7986cb' },
+      'infinity': { start: '#2196f3', end: '#64b5f6' }
+    };
+
+    const colors = colorMap[nextMilestone?.tier.color] || colorMap[milestone.color];
+
     // Círculo de progresso SVG
     const progressCircle = nextMilestone ? `
       <svg class="story-progress-ring" width="280" height="280" viewBox="0 0 280 280">
@@ -114,8 +127,8 @@ class StoryView {
         />
         <defs>
           <linearGradient id="gradient-${milestone.color}" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" style="stop-color:${milestone.gradient.match(/#[a-fA-F0-9]{6}/)[0]};stop-opacity:1" />
-            <stop offset="100%" style="stop-color:${milestone.gradient.match(/#[a-fA-F0-9]{6}/g)[1] || milestone.gradient.match(/#[a-fA-F0-9]{6}/)[0]};stop-opacity:1" />
+            <stop offset="0%" style="stop-color:${colors.start};stop-opacity:1" />
+            <stop offset="100%" style="stop-color:${colors.end};stop-opacity:1" />
           </linearGradient>
         </defs>
       </svg>
