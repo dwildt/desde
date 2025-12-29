@@ -276,6 +276,7 @@ main {
   .habit-delete-btn,
   button[aria-label*="Importar"],
   button[aria-label*="Exportar"],
+  button[aria-label*="Stories"],
   .skip-to-content,
   .footer-links {
     display: none !important;

@@ -223,6 +223,31 @@ function initializeEventListeners() {
 
   // Event delegation: Handler para mudança de ordenação
   EventDelegation.register('[data-action="change-sort"]', 'change', handleSortChange);
+
+  // Event delegation: Handler para abrir story view
+  EventDelegation.register('[data-action="open-story"]', 'click', function() {
+    StoryView.open(0);
+  });
+
+  // Event delegation: Handler para fechar story
+  EventDelegation.register('[data-action="close-story"]', 'click', function() {
+    StoryView.close();
+  });
+
+  // Event delegation: Handler para story anterior
+  EventDelegation.register('[data-action="story-prev"]', 'click', function() {
+    StoryView.previousStory();
+  });
+
+  // Event delegation: Handler para próximo story
+  EventDelegation.register('[data-action="story-next"]', 'click', function() {
+    StoryView.nextStory();
+  });
+
+  // Event delegation: Handler para compartilhar story
+  EventDelegation.register('[data-action="share-story"]', 'click', function() {
+    StoryView.shareStory();
+  });
 }
 
 /**
@@ -250,5 +275,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // Verificar se é a primeira visita e mostrar modal de boas-vindas
   if (typeof WelcomeModal !== 'undefined') {
     WelcomeModal.checkFirstVisit();
+  }
+
+  // Inicializar StoryView
+  if (typeof StoryView !== 'undefined') {
+    StoryView.init();
   }
 });

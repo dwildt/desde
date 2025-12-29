@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="styles/animations.css">
   <link rel="stylesheet" href="styles/view-modes.css">
   <link rel="stylesheet" href="styles/milestones.css">
+  <link rel="stylesheet" href="styles/story-mode.css">
   <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
@@ -72,6 +73,7 @@
   <script src="components/organisms/AddHabitModal.js"></script>
   <script src="components/organisms/ImportExportModal.js"></script>
   <script src="components/organisms/WelcomeModal.js"></script>
+  <script src="components/organisms/StoryView.js"></script>
 
   <script src="scripts/app.js"></script>
 
@@ -84,12 +86,14 @@
     const confirmDialogHtml = ConfirmDialog.render();
     const importExportModalHtml = ImportExportModal.render();
     const welcomeModalHtml = WelcomeModal.render();
+    const storyViewHtml = StoryView.render();
 
     document.getElementById('modalContainer').innerHTML = [
       addHabitModalHtml,
       confirmDialogHtml,
       importExportModalHtml,
-      welcomeModalHtml
+      welcomeModalHtml,
+      storyViewHtml
     ].join('');
 
     // CRÍTICO: Inicializar EventDelegation DEPOIS que o HTML foi renderizado

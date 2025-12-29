@@ -26,6 +26,14 @@ class Header {
       ariaLabel: 'Importar ou Exportar dados'
     });
 
+    const storyButton = Button.render({
+      text: '📸',
+      variant: 'secondary',
+      action: 'open-story',
+      actionData: { index: 0 },
+      ariaLabel: 'Visualizar no modo Stories'
+    });
+
     const sortSelector = SortSelector.render();
     const viewModeToggle = ViewModeToggle.render();
     const themeToggle = ThemeToggle.render();
@@ -38,6 +46,7 @@ class Header {
             <nav class="header-actions" role="navigation" aria-label="Ações principais">
               ${addHabitButton}
               ${importExportButton}
+              ${storyButton}
               ${sortSelector}
               ${viewModeToggle}
               ${themeToggle}
