@@ -11,24 +11,23 @@ test.describe('Fluxo Principal de Hábitos', () => {
     await page.goto('http://localhost:3000');
     await page.evaluate(() => {
       localStorage.clear();
-      // Marcar como já visitado para não mostrar o WelcomeModal
-      localStorage.setItem('desde-has-visited', 'true');
     });
     await page.reload();
   });
 
-  test('deve carregar a página com dados pré-cadastrados', async ({ page }) => {
+  test('deve carregar a página com blank state quando não há hábitos', async ({ page }) => {
     await page.goto('http://localhost:3000');
 
     // Verificar título
     await expect(page).toHaveTitle(/Desde/);
 
-    // Verificar que existem hábitos pré-cadastrados
-    const habitCards = page.locator('.habit-card');
-    await expect(habitCards).toHaveCount(3);
+    // Verificar que blank state está visível
+    const blankState = page.locator('.blank-state-welcome');
+    await expect(blankState).toBeVisible();
 
-    // Verificar nomes dos hábitos
-    await expect(page.locator('.habit-name').first()).toContainText('Escrevendo');
+    // Verificar que não há habit cards
+    const habitCards = page.locator('.habit-card');
+    await expect(habitCards).toHaveCount(0);
   });
 
   test('deve adicionar um novo hábito', async ({ page }) => {

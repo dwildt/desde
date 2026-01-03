@@ -3,6 +3,8 @@
  * Componente de lista de hábitos
  */
 
+/* global Button */
+
 class HabitList {
   /**
    * Renderiza a lista de hábitos
@@ -28,15 +30,41 @@ class HabitList {
   }
 
   /**
-   * Renderiza estado vazio
+   * Renderiza estado vazio com boas-vindas
    * @returns {string} HTML do estado vazio
    */
   static renderEmptyState() {
+    const addFirstHabitButton = Button.render({
+      text: '+ Adicionar Primeiro Hábito',
+      variant: 'primary',
+      action: 'open-modal',
+      actionData: { modalId: 'addHabitModal' },
+      ariaLabel: 'Adicionar seu primeiro hábito'
+    });
+
     return `
-      <div class="empty-state" role="status" aria-live="polite">
-        <span class="empty-icon" aria-hidden="true">📝</span>
-        <h2>Nenhum hábito cadastrado</h2>
-        <p>Adicione seu primeiro hábito para começar a acompanhar!</p>
+      <div class="empty-state blank-state-welcome" role="status" aria-live="polite">
+        <span class="empty-icon" aria-hidden="true">🗓️</span>
+        <h2>Bem-vindo ao Desde!</h2>
+        <p>Acompanhe há quantos dias você mantém seus hábitos!</p>
+
+        <div class="blank-state-button">
+          ${addFirstHabitButton}
+        </div>
+
+        <div class="blank-state-examples">
+          <h3>📝 Exemplos do que você pode rastrear:</h3>
+          <ul>
+            <li><span aria-hidden="true">🧘</span> Meditando</li>
+            <li><span aria-hidden="true">🏃</span> Correndo</li>
+            <li><span aria-hidden="true">📚</span> Lendo</li>
+            <li><span aria-hidden="true">💻</span> Programando</li>
+            <li><span aria-hidden="true">✍️</span> Escrevendo</li>
+          </ul>
+          <p class="examples-note">Informe quando você começou e acompanhe sua continuidade!</p>
+        </div>
+
+        <p class="blank-state-tip">💡 Seus dados ficam salvos apenas neste navegador</p>
       </div>
     `;
   }

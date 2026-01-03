@@ -73,6 +73,17 @@ class HeaderMenu {
             <div class="header-menu-item">
               ${ThemeToggle.render()}
             </div>
+
+            <!-- Help -->
+            <div class="header-menu-item">
+              ${Button.render({
+      text: '❓ Como Usar',
+      variant: 'secondary',
+      action: 'open-modal',
+      actionData: { modalId: 'helpModal' },
+      ariaLabel: 'Ver informações sobre como usar o Desde'
+    })}
+            </div>
           </div>
         </div>
       </div>

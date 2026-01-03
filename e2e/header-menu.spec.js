@@ -216,5 +216,21 @@ test.describe('Header Menu', () => {
       const newTheme = await page.evaluate(() => document.documentElement.getAttribute('data-theme'));
       expect(newTheme).not.toBe(initialTheme);
     });
+
+    test('deve abrir modal de Como Usar via menu', async ({ page }) => {
+      // Abrir menu
+      await page.getByRole('button', { name: /abrir menu/i }).click();
+
+      // Clicar em Como Usar
+      await page.getByRole('button', { name: /como usar/i }).click();
+
+      // Verificar que modal de ajuda abriu
+      const helpModal = page.locator('#helpModal');
+      await expect(helpModal).toBeVisible();
+
+      // Verificar título do modal
+      const title = helpModal.getByRole('heading', { name: /como usar/i });
+      await expect(title).toBeVisible();
+    });
   });
 });

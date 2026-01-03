@@ -267,6 +267,58 @@ main {
   margin-bottom: var(--spacing-lg);
 }
 
+/* Blank State Enhancements */
+.blank-state-welcome {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.blank-state-examples {
+  margin: var(--spacing-xl) 0;
+  padding: var(--spacing-md);
+  background: var(--surface);
+  border-radius: var(--border-radius-sm);
+  text-align: left;
+}
+
+.blank-state-examples h3 {
+  font-size: var(--font-size-md);
+  margin-bottom: var(--spacing-sm);
+  color: var(--text-primary);
+}
+
+.blank-state-examples ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  padding: 0;
+  margin: var(--spacing-md) 0;
+}
+
+.blank-state-examples li {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  font-size: var(--font-size-sm);
+}
+
+.examples-note {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  margin-top: var(--spacing-sm);
+}
+
+.blank-state-button {
+  margin: var(--spacing-lg) 0;
+}
+
+.blank-state-tip {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  margin-top: var(--spacing-lg);
+}
+
 /* Print Styles */
 @media print {
   /* Ocultar elementos de ação */

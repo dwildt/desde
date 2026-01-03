@@ -3,33 +3,14 @@
  * Orquestrador principal da aplicação
  */
 
-// Dados iniciais pré-cadastrados
-const INITIAL_HABITS = [
-  {
-    name: 'Escrevendo',
-    startDate: '2024-01-01'
-  },
-  {
-    name: 'Codando',
-    startDate: '2025-08-07'
-  },
-  {
-    name: 'Exercícios Físicos',
-    startDate: '2025-12-21'
-  }
-];
-
 /**
- * Inicializa dados pré-cadastrados se não houver dados
+ * Inicializa dados da aplicação
+ * Nota: Não mais adiciona hábitos automáticos
+ * Usuários verão o blank state com boas-vindas
  */
 function initializeData() {
-  const habits = Storage.getHabits();
-
-  if (habits.length === 0) {
-    INITIAL_HABITS.forEach(habit => {
-      Storage.addHabit(habit);
-    });
-  }
+  // No longer auto-adding initial habits
+  // Users will see blank state and add their own habits
 }
 
 /**
@@ -275,11 +256,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   if (typeof ImportExportModal !== 'undefined') {
     ImportExportModal.init();
-  }
-
-  // Verificar se é a primeira visita e mostrar modal de boas-vindas
-  if (typeof WelcomeModal !== 'undefined') {
-    WelcomeModal.checkFirstVisit();
   }
 
   // Inicializar StoryView

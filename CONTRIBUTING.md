@@ -333,11 +333,20 @@ components/
 **Componentes Molecules:**
 - `HabitCard`: Card de exibição de hábito
 - `FormField`: Campo de formulário com label
-- `HeaderMenu`: Modal com ações secundárias (Sort, Import/Export, Stories, Theme)
+- `HeaderMenu`: Modal com ações secundárias (Sort, Import/Export, Stories, Theme, Help)
 - `ThemeToggle`: Toggle de tema claro/escuro
 - `ViewModeToggle`: Toggle de visualização (Grid/List)
 - `SortSelector`: Seletor de ordenação
 - `ConfirmDialog`: Modal de confirmação de ações
+
+**Componentes Organisms:**
+- `Header`: Cabeçalho com ações principais (Adicionar Hábito, View Mode, Menu)
+- `HabitList`: Lista de hábitos com renderização de estado vazio inteligente
+- `AddHabitModal`: Modal para adicionar novo hábito
+- `ImportExportModal`: Modal para importar/exportar dados JSON
+- `HelpModal`: Modal com instruções de uso do aplicativo
+- `WelcomeModal`: Modal de boas-vindas (deprecated - substituído por estado vazio inline)
+- `StoryView`: Visualização no estilo stories com navegação por cards
 
 ### Fluxo de Dados
 
