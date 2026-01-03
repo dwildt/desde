@@ -357,3 +357,71 @@
   margin-top: var(--spacing-md);
   font-size: var(--font-size-sm);
 }
+
+/* ========================================
+   HEADER MENU
+   Menu hambúrguer para ações secundárias
+   ======================================== */
+
+/* Header Menu Modal Styles */
+.header-menu-modal .modal-content {
+  max-width: 400px;
+  width: 90%;
+}
+
+.header-menu-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.header-menu-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.header-menu-label {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+}
+
+.header-menu-icon {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+}
+
+.header-menu-select {
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 2px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+  font-family: var(--font-family);
+  font-size: var(--font-size-md);
+  color: var(--text-primary);
+  background: var(--surface);
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.header-menu-select:focus {
+  outline: none;
+  border-color: var(--primary-orange);
+}
+
+.header-menu-item .button {
+  width: 100%;
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.header-menu-item .theme-toggle {
+  margin: 0 auto;
+}

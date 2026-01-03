@@ -1,7 +1,10 @@
 /**
  * Header.js
- * Componente de cabeçalho com ThemeToggle
+ * Componente de cabeçalho simplificado com menu hambúrguer
+ * Padronizado para todas as resoluções (desktop + mobile)
  */
+
+/* global Button, ViewModeToggle */
 
 class Header {
   /**
@@ -9,7 +12,7 @@ class Header {
    * @returns {string} HTML do header
    */
   static render() {
-    // Extrair botões para variáveis ANTES do template
+    // Botões principais sempre visíveis
     const addHabitButton = Button.render({
       text: '+ Adicionar Hábito',
       variant: 'primary',
@@ -18,25 +21,16 @@ class Header {
       ariaLabel: 'Adicionar novo hábito'
     });
 
-    const importExportButton = Button.render({
-      text: '💾',
+    const viewModeToggle = ViewModeToggle.render();
+
+    // Menu hambúrguer com ações secundárias
+    const menuButton = Button.render({
+      text: '☰',
       variant: 'secondary',
       action: 'open-modal',
-      actionData: { modalId: 'importExportModal' },
-      ariaLabel: 'Importar ou Exportar dados'
+      actionData: { modalId: 'headerMenu' },
+      ariaLabel: 'Abrir menu'
     });
-
-    const storyButton = Button.render({
-      text: '📸',
-      variant: 'secondary',
-      action: 'open-story',
-      actionData: { index: 0 },
-      ariaLabel: 'Visualizar no modo Stories'
-    });
-
-    const sortSelector = SortSelector.render();
-    const viewModeToggle = ViewModeToggle.render();
-    const themeToggle = ThemeToggle.render();
 
     return `
       <header class="header" role="banner">
@@ -45,11 +39,8 @@ class Header {
             <h1>🗓️ Desde</h1>
             <nav class="header-actions" role="navigation" aria-label="Ações principais">
               ${addHabitButton}
-              ${importExportButton}
-              ${storyButton}
-              ${sortSelector}
               ${viewModeToggle}
-              ${themeToggle}
+              ${menuButton}
             </nav>
           </div>
         </div>

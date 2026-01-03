@@ -326,9 +326,18 @@ Use o template de Feature Request:
 ```
 components/
 ├── atoms/          # Componentes mais básicos (Button, Input)
-├── molecules/      # Combinações de atoms (HabitCard, FormField)
+├── molecules/      # Combinações de atoms (HabitCard, FormField, HeaderMenu)
 └── organisms/      # Componentes complexos (Header, HabitList)
 ```
+
+**Componentes Molecules:**
+- `HabitCard`: Card de exibição de hábito
+- `FormField`: Campo de formulário com label
+- `HeaderMenu`: Modal com ações secundárias (Sort, Import/Export, Stories, Theme)
+- `ThemeToggle`: Toggle de tema claro/escuro
+- `ViewModeToggle`: Toggle de visualização (Grid/List)
+- `SortSelector`: Seletor de ordenação
+- `ConfirmDialog`: Modal de confirmação de ações
 
 ### Fluxo de Dados
 

@@ -10,9 +10,10 @@ Um aplicativo web minimalista para rastrear seus hábitos e ver há quantos dias
 
 - ✨ Interface limpa e intuitiva
 - 📊 Visualização em cards com contadores de dias
+- 🍔 Menu hambúrguer que organiza ações secundárias
 - 🌓 Modo claro e escuro
 - 💾 Export/Import de dados em JSON
-- 📱 Totalmente responsivo
+- 📱 Totalmente responsivo (interface consistente em desktop e mobile)
 - ⚡ 100% Vanilla JavaScript (sem frameworks)
 - 🎨 Design System baseado nas cores Wildtech
 - ♿ Acessível (ARIA labels, navegação por teclado)
@@ -188,9 +189,9 @@ desde/
 
 ### Cobertura de Testes
 
-- **22 testes unitários** (Storage, HabitUtils, Theme)
-- **13 testes E2E** (Fluxo principal, Tema, Import/Export)
-- **Total**: 35 testes automatizados
+- **22 testes unitários** (Storage, HabitUtils, Theme, Milestones)
+- **25 testes E2E** (Fluxo principal, Tema, Import/Export, Header Menu)
+- **Total**: 47 testes automatizados
 
 ### Executar Testes
 
