@@ -38,11 +38,15 @@ class EventDelegation {
       }
     });
 
-    // Handler para abrir modais
+    // Handler para abrir modals
     this.register('[data-action="open-modal"]', 'click', function() {
       const modalId = this.dataset.modalId;
       if (modalId === 'addHabitModal') AddHabitModal.open();
       if (modalId === 'importExportModal') ImportExportModal.open();
+      if (modalId === 'headerMenu') {
+        const modal = document.getElementById('headerMenu');
+        if (modal) modal.style.display = 'flex';
+      }
     });
 
     // Handler para trocar modo de visualização

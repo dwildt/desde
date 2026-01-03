@@ -11,8 +11,8 @@ test.describe('Header Menu', () => {
     await expect(addButton).toBeVisible();
 
     // Verifica View Mode Toggle (Grid e List)
-    const gridButton = page.getByRole('button', { name: /visualizar em grade/i });
-    const listButton = page.getByRole('button', { name: /visualizar em lista/i });
+    const gridButton = page.getByRole('button', { name: /visualização em grade/i });
+    const listButton = page.getByRole('button', { name: /visualização em lista/i });
     await expect(gridButton).toBeVisible();
     await expect(listButton).toBeVisible();
 
