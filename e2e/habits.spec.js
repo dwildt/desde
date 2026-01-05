@@ -33,29 +33,39 @@ test.describe('Fluxo Principal de Hábitos', () => {
   test('deve adicionar um novo hábito', async ({ page }) => {
     await page.goto('http://localhost:3000');
 
-    // Clicar no botão de adicionar
-    await page.click('button:has-text("Adicionar Hábito")');
+    // Clicar no botão de adicionar (do blank state ou header)
+    await page.getByRole('button', { name: /adicionar.*hábito/i }).first().click();
 
     // Preencher formulário
     await page.fill('#habitName', 'Meditação');
     await page.fill('#habitStartDate', '2025-12-20');
 
-    // Submeter formulário
-    await page.click('button[type="submit"]:has-text("Adicionar")');
+    // Submeter formulário usando aria-label
+    await page.getByRole('button', { name: /salvar novo hábito/i }).click();
+
+    // Aguardar modal fechar
+    await expect(page.locator('#addHabitModal')).not.toBeVisible();
 
     // Verificar que o hábito foi adicionado
     await expect(page.locator('.habit-name:has-text("Meditação")')).toBeVisible();
 
-    // Verificar que temos 4 hábitos agora (3 pré-cadastrados + 1 novo)
+    // Verificar que temos 1 hábito agora (sem hábitos pré-cadastrados)
     const habitCards = page.locator('.habit-card');
-    await expect(habitCards).toHaveCount(4);
+    await expect(habitCards).toHaveCount(1);
   });
 
   test('deve deletar um hábito', async ({ page }) => {
     await page.goto('http://localhost:3000');
 
-    // Contar hábitos iniciais
-    const initialCount = await page.locator('.habit-card').count();
+    // Primeiro adicionar um hábito
+    await page.getByRole('button', { name: /adicionar.*hábito/i }).first().click();
+    await page.fill('#habitName', 'Teste');
+    await page.fill('#habitStartDate', '2025-01-01');
+    await page.getByRole('button', { name: /salvar novo hábito/i }).click();
+    await expect(page.locator('#addHabitModal')).not.toBeVisible();
+
+    // Verificar que hábito foi criado
+    await expect(page.locator('.habit-card')).toHaveCount(1);
 
     // Clicar no botão de deletar do primeiro hábito
     await page.locator('.habit-delete-btn').first().click();
@@ -63,16 +73,23 @@ test.describe('Fluxo Principal de Hábitos', () => {
     // Confirmar deleção no modal
     await page.click('button:has-text("Deletar")');
 
-    // Verificar que um hábito foi removido
-    const newCount = await page.locator('.habit-card').count();
-    expect(newCount).toBe(initialCount - 1);
+    // Verificar que hábito foi removido e blank state voltou
+    await expect(page.locator('.habit-card')).toHaveCount(0);
+    await expect(page.locator('.blank-state-welcome')).toBeVisible();
   });
 
   test('deve cancelar deleção de hábito', async ({ page }) => {
     await page.goto('http://localhost:3000');
 
-    // Contar hábitos iniciais
-    const initialCount = await page.locator('.habit-card').count();
+    // Primeiro adicionar um hábito
+    await page.getByRole('button', { name: /adicionar.*hábito/i }).first().click();
+    await page.fill('#habitName', 'Teste');
+    await page.fill('#habitStartDate', '2025-01-01');
+    await page.getByRole('button', { name: /salvar novo hábito/i }).click();
+    await expect(page.locator('#addHabitModal')).not.toBeVisible();
+
+    // Verificar que hábito foi criado
+    await expect(page.locator('.habit-card')).toHaveCount(1);
 
     // Clicar no botão de deletar
     await page.locator('.habit-delete-btn').first().click();
@@ -80,19 +97,21 @@ test.describe('Fluxo Principal de Hábitos', () => {
     // Cancelar deleção (usar seletor específico do modal de confirmação)
     await page.locator('#confirmDialog button:has-text("Cancelar")').click();
 
-    // Verificar que nenhum hábito foi removido
-    const newCount = await page.locator('.habit-card').count();
-    expect(newCount).toBe(initialCount);
+    // Verificar que hábito ainda existe
+    await expect(page.locator('.habit-card')).toHaveCount(1);
   });
 
   test('não deve submeter formulário vazio', async ({ page }) => {
     await page.goto('http://localhost:3000');
 
     // Abrir modal
-    await page.click('button:has-text("Adicionar Hábito")');
+    await page.getByRole('button', { name: /adicionar.*hábito/i }).first().click();
+
+    // Aguardar modal abrir
+    await expect(page.locator('#addHabitModal')).toBeVisible();
 
     // Tentar submeter sem preencher
-    await page.click('button[type="submit"]:has-text("Adicionar")');
+    await page.getByRole('button', { name: /salvar novo hábito/i }).click();
 
     // Modal deve continuar aberto (verificar que o modal existe)
     await expect(page.locator('#addHabitModal')).toBeVisible();

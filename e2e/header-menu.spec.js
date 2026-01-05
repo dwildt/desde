@@ -81,8 +81,8 @@ test.describe('Header Menu', () => {
     const modal = page.locator('#headerMenu');
     await expect(modal).toBeVisible();
 
-    // Clicar no overlay
-    await page.locator('.modal-overlay').first().click();
+    // Clicar no overlay do modal específico
+    await modal.locator('.modal-overlay').click({ force: true });
 
     // Verificar que o modal foi fechado
     await expect(modal).not.toBeVisible();
@@ -188,8 +188,11 @@ test.describe('Header Menu', () => {
       // Primeiro adicionar um hábito (necessário para Stories)
       await page.getByRole('button', { name: /adicionar novo hábito/i }).click();
       await page.locator('#habitName').fill('Teste');
-      await page.locator('#habitDate').fill('2024-01-01');
-      await page.getByRole('button', { name: /salvar/i }).click();
+      await page.locator('#habitStartDate').fill('2024-01-01');
+      await page.getByRole('button', { name: /salvar novo hábito/i }).click();
+
+      // Aguardar modal fechar
+      await expect(page.locator('#addHabitModal')).not.toBeVisible();
 
       // Abrir menu
       await page.getByRole('button', { name: /abrir menu/i }).click();
