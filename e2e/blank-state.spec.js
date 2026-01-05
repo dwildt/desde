@@ -86,7 +86,10 @@ test.describe('Blank State', () => {
 
       await page.locator('#habitName').fill('Meditação');
       await page.locator('#habitStartDate').fill('2024-01-01');
-      await page.locator('#addHabitModal').getByRole('button', { name: /adicionar/i }).click();
+      await page.getByRole('button', { name: /salvar novo hábito/i }).click();
+
+      // Aguardar modal fechar
+      await expect(modal).not.toBeVisible();
 
       // Verificar que blank state desapareceu
       await expect(blankState).not.toBeVisible();
@@ -106,7 +109,10 @@ test.describe('Blank State', () => {
 
       await page.locator('#habitName').fill('Corrida Matinal');
       await page.locator('#habitStartDate').fill('2025-01-01');
-      await page.locator('#addHabitModal').getByRole('button', { name: /adicionar/i }).click();
+      await page.getByRole('button', { name: /salvar novo hábito/i }).click();
+
+      // Aguardar modal fechar
+      await expect(modal).not.toBeVisible();
 
       // Verificar nome no card
       const habitName = page.locator('.habit-card').getByText('Corrida Matinal');
@@ -125,7 +131,10 @@ test.describe('Blank State', () => {
 
       await page.locator('#habitName').fill('Teste');
       await page.locator('#habitStartDate').fill('2024-01-01');
-      await page.locator('#addHabitModal').getByRole('button', { name: /adicionar/i }).click();
+      await page.getByRole('button', { name: /salvar novo hábito/i }).click();
+
+      // Aguardar modal fechar
+      await expect(modal).not.toBeVisible();
 
       // Verificar que blank state sumiu
       const blankState = page.locator('.blank-state-welcome');
@@ -147,13 +156,13 @@ test.describe('Blank State', () => {
       await addButton.click();
       await page.locator('#habitName').fill('Hábito 1');
       await page.locator('#habitStartDate').fill('2024-01-01');
-      await page.locator('#addHabitModal').getByRole('button', { name: /adicionar/i }).click();
+      await page.getByRole('button', { name: /salvar novo hábito/i }).click();
 
       // Segundo hábito
       await addButton.click();
       await page.locator('#habitName').fill('Hábito 2');
       await page.locator('#habitStartDate').fill('2024-01-02');
-      await page.locator('#addHabitModal').getByRole('button', { name: /adicionar/i }).click();
+      await page.getByRole('button', { name: /salvar novo hábito/i }).click();
 
       // Deletar primeiro hábito
       await page.locator('.habit-card').first().getByRole('button', { name: /deletar/i }).click();
@@ -175,12 +184,12 @@ test.describe('Blank State', () => {
       await addButton.click();
       await page.locator('#habitName').fill('Hábito 1');
       await page.locator('#habitStartDate').fill('2024-01-01');
-      await page.locator('#addHabitModal').getByRole('button', { name: /adicionar/i }).click();
+      await page.getByRole('button', { name: /salvar novo hábito/i }).click();
 
       await addButton.click();
       await page.locator('#habitName').fill('Hábito 2');
       await page.locator('#habitStartDate').fill('2024-01-02');
-      await page.locator('#addHabitModal').getByRole('button', { name: /adicionar/i }).click();
+      await page.getByRole('button', { name: /salvar novo hábito/i }).click();
 
       // Deletar primeiro hábito
       await page.locator('.habit-card').first().getByRole('button', { name: /deletar/i }).click();
