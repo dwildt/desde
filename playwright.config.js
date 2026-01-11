@@ -21,10 +21,13 @@ module.exports = defineConfig({
       name: 'firefox',
       use: { ...devices['Desktop Firefox'] },
     },
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },
+    // WebKit é executado apenas localmente (não no CI devido a timeouts)
+    ...(process.env.CI ? [] : [
+      {
+        name: 'webkit',
+        use: { ...devices['Desktop Safari'] },
+      },
+    ]),
   ],
   webServer: {
     command: 'npm run dev',
