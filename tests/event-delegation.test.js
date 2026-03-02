@@ -30,8 +30,17 @@ class EventDelegation {
 
     this.register('[data-action="open-modal"]', 'click', function() {
       const modalId = this.dataset.modalId;
+      if (modalId !== 'headerMenu') {
+        const headerMenu = document.getElementById('headerMenu');
+        if (headerMenu) headerMenu.style.display = 'none';
+      }
       if (modalId === 'addHabitModal') AddHabitModal.open();
       if (modalId === 'importExportModal') ImportExportModal.open();
+      if (modalId === 'helpModal') HelpModal.open();
+      if (modalId === 'headerMenu') {
+        const modal = document.getElementById('headerMenu');
+        if (modal) modal.style.display = 'flex';
+      }
     });
   }
 
@@ -140,6 +149,7 @@ describe('EventDelegation', () => {
       // Mock das funções globais
       global.AddHabitModal = { open: jest.fn() };
       global.ImportExportModal = { open: jest.fn() };
+      global.HelpModal = { open: jest.fn() };
 
       EventDelegation.init();
 
@@ -156,6 +166,65 @@ describe('EventDelegation', () => {
       // Cleanup
       delete global.AddHabitModal;
       delete global.ImportExportModal;
+      delete global.HelpModal;
+    });
+
+    test('deve fechar o headerMenu ao abrir outro modal', () => {
+      EventDelegation.clear();
+
+      global.AddHabitModal = { open: jest.fn() };
+      global.ImportExportModal = { open: jest.fn() };
+      global.HelpModal = { open: jest.fn() };
+
+      // Adicionar headerMenu visível ao DOM
+      const headerMenu = document.createElement('div');
+      headerMenu.id = 'headerMenu';
+      headerMenu.style.display = 'flex';
+      document.body.appendChild(headerMenu);
+
+      EventDelegation.init();
+
+      const openButton = document.createElement('button');
+      openButton.setAttribute('data-action', 'open-modal');
+      openButton.setAttribute('data-modal-id', 'helpModal');
+      document.body.appendChild(openButton);
+
+      openButton.click();
+
+      expect(headerMenu.style.display).toBe('none');
+      expect(global.HelpModal.open).toHaveBeenCalled();
+
+      delete global.AddHabitModal;
+      delete global.ImportExportModal;
+      delete global.HelpModal;
+    });
+
+    test('não deve fechar o headerMenu ao abrir ele mesmo', () => {
+      EventDelegation.clear();
+
+      global.AddHabitModal = { open: jest.fn() };
+      global.ImportExportModal = { open: jest.fn() };
+      global.HelpModal = { open: jest.fn() };
+
+      const headerMenu = document.createElement('div');
+      headerMenu.id = 'headerMenu';
+      headerMenu.style.display = 'none';
+      document.body.appendChild(headerMenu);
+
+      EventDelegation.init();
+
+      const openButton = document.createElement('button');
+      openButton.setAttribute('data-action', 'open-modal');
+      openButton.setAttribute('data-modal-id', 'headerMenu');
+      document.body.appendChild(openButton);
+
+      openButton.click();
+
+      expect(headerMenu.style.display).toBe('flex');
+
+      delete global.AddHabitModal;
+      delete global.ImportExportModal;
+      delete global.HelpModal;
     });
   });
 

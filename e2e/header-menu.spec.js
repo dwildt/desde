@@ -227,13 +227,30 @@ test.describe('Header Menu', () => {
       // Clicar em Como Usar
       await page.getByRole('button', { name: /como usar/i }).click();
 
-      // Verificar que modal de ajuda abriu
+      // Verificar que o menu fechou
+      await expect(page.locator('#headerMenu')).not.toBeVisible();
+
+      // Verificar que modal de ajuda abriu na frente
       const helpModal = page.locator('#helpModal');
       await expect(helpModal).toBeVisible();
 
       // Verificar título do modal
       const title = helpModal.getByRole('heading', { name: /como usar/i });
       await expect(title).toBeVisible();
+    });
+
+    test('deve fechar menu ao abrir Import/Export', async ({ page }) => {
+      // Abrir menu
+      await page.getByRole('button', { name: /abrir menu/i }).click();
+
+      // Clicar em Import/Export
+      await page.getByRole('button', { name: /importar ou exportar/i }).click();
+
+      // Verificar que o menu fechou
+      await expect(page.locator('#headerMenu')).not.toBeVisible();
+
+      // Verificar que modal de Import/Export abriu
+      await expect(page.locator('#importExportModal')).toBeVisible();
     });
   });
 });

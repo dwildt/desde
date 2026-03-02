@@ -43,6 +43,10 @@ class EventDelegation {
     // Handler para abrir modals
     this.register('[data-action="open-modal"]', 'click', function() {
       const modalId = this.dataset.modalId;
+      if (modalId !== 'headerMenu') {
+        const headerMenu = document.getElementById('headerMenu');
+        if (headerMenu) headerMenu.style.display = 'none';
+      }
       if (modalId === 'addHabitModal') AddHabitModal.open();
       if (modalId === 'importExportModal') ImportExportModal.open();
       if (modalId === 'helpModal') HelpModal.open();
