@@ -91,6 +91,38 @@ class HeaderMenu {
   }
 
   /**
+   * Abre o menu
+   */
+  static open() {
+    const modal = document.getElementById('headerMenu');
+    if (modal) {
+      modal.style.display = 'flex';
+
+      this.escListener = (e) => {
+        if (e.key === 'Escape') {
+          this.close();
+        }
+      };
+      document.addEventListener('keydown', this.escListener);
+    }
+  }
+
+  /**
+   * Fecha o menu
+   */
+  static close() {
+    const modal = document.getElementById('headerMenu');
+    if (modal) {
+      modal.style.display = 'none';
+
+      if (this.escListener) {
+        document.removeEventListener('keydown', this.escListener);
+        this.escListener = null;
+      }
+    }
+  }
+
+  /**
    * Renderiza o select de ordenação
    * @returns {string} HTML do select
    */

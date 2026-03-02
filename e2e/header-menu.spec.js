@@ -81,8 +81,8 @@ test.describe('Header Menu', () => {
     const modal = page.locator('#headerMenu');
     await expect(modal).toBeVisible();
 
-    // Clicar no overlay do modal específico
-    await modal.locator('.modal-overlay').click({ force: true });
+    // Clicar no overlay fora da área do modal-content (canto superior esquerdo)
+    await modal.locator('.modal-overlay').click({ position: { x: 10, y: 10 } });
 
     // Verificar que o modal foi fechado
     await expect(modal).not.toBeVisible();
@@ -201,7 +201,7 @@ test.describe('Header Menu', () => {
       await page.getByRole('button', { name: /visualizar.*stories/i }).click();
 
       // Verificar que Stories abriu
-      const storyModal = page.locator('#storyView');
+      const storyModal = page.locator('#storyViewModal');
       await expect(storyModal).toBeVisible();
     });
 

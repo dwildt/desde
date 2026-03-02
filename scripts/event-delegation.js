@@ -3,7 +3,7 @@
  * Centralized event handling system using event delegation pattern
  */
 
-/* global AddHabitModal, ImportExportModal, HelpModal, ViewMode */
+/* global AddHabitModal, ImportExportModal, HelpModal, HeaderMenu, ViewMode */
 
 class EventDelegation {
   static registry = new Map();
@@ -34,6 +34,10 @@ class EventDelegation {
     // Handler para fechar modais
     this.register('[data-action="close-modal"]', 'click', function() {
       const modalId = this.dataset.modalId;
+      if (modalId === 'headerMenu') {
+        HeaderMenu.close();
+        return;
+      }
       const modal = document.getElementById(modalId);
       if (modal) {
         modal.style.display = 'none';
@@ -51,8 +55,7 @@ class EventDelegation {
       if (modalId === 'importExportModal') ImportExportModal.open();
       if (modalId === 'helpModal') HelpModal.open();
       if (modalId === 'headerMenu') {
-        const modal = document.getElementById('headerMenu');
-        if (modal) modal.style.display = 'flex';
+        HeaderMenu.open();
       }
     });
 
