@@ -42,7 +42,7 @@ class StoryView {
             <!-- Será preenchido dinamicamente -->
           </div>
 
-          <!-- Barra de ações laterais -->
+          <!-- Barra de ações laterais (desktop) -->
           <div class="story-actions">
             <button
               class="story-action-btn"
@@ -79,6 +79,64 @@ class StoryView {
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <line x1="18" y1="6" x2="6" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 <line x1="6" y1="6" x2="18" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Barra de controles (mobile) -->
+          <div class="story-controls-bar">
+            <button
+              class="story-action-btn"
+              data-action="story-prev"
+              aria-label="Hábito anterior"
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+
+            <button
+              class="story-action-btn"
+              data-action="share-story"
+              aria-label="Compartilhar story"
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <polyline points="16 6 12 2 8 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <line x1="12" y1="2" x2="12" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+
+            <button
+              class="story-action-btn"
+              data-action="download-story"
+              aria-label="Salvar imagem"
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <polyline points="7 10 12 15 17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <line x1="12" y1="15" x2="12" y2="3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+
+            <button
+              class="story-action-btn"
+              data-action="close-story"
+              aria-label="Fechar visualização"
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <line x1="18" y1="6" x2="6" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <line x1="6" y1="6" x2="18" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+
+            <button
+              class="story-action-btn"
+              data-action="story-next"
+              aria-label="Próximo hábito"
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </button>
           </div>
@@ -382,13 +440,12 @@ class StoryView {
       const originalCursor = document.body.style.cursor;
       document.body.style.cursor = 'wait';
 
-      // Desabilitar botão temporariamente
-      const downloadBtn = document.querySelector('[data-action="download-story"]');
-      const originalBtnContent = downloadBtn ? downloadBtn.innerHTML : null;
-      if (downloadBtn) {
-        downloadBtn.disabled = true;
-        downloadBtn.style.opacity = '0.5';
-      }
+      // Desabilitar botões temporariamente (desktop + mobile)
+      const downloadBtns = document.querySelectorAll('[data-action="download-story"]');
+      downloadBtns.forEach(btn => {
+        btn.disabled = true;
+        btn.style.opacity = '0.5';
+      });
 
       // Capturar o story como canvas com alta qualidade
       const canvas = await html2canvas(storyContent, {
@@ -433,10 +490,10 @@ class StoryView {
 
         // Restaurar UI
         document.body.style.cursor = originalCursor;
-        if (downloadBtn) {
-          downloadBtn.disabled = false;
-          downloadBtn.style.opacity = '1';
-        }
+        downloadBtns.forEach(btn => {
+          btn.disabled = false;
+          btn.style.opacity = '1';
+        });
 
         console.log('✅ Story salvo com sucesso:', link.download);
       }, 'image/png');
@@ -447,11 +504,10 @@ class StoryView {
 
       // Restaurar UI em caso de erro
       document.body.style.cursor = 'default';
-      const downloadBtn = document.querySelector('[data-action="download-story"]');
-      if (downloadBtn) {
-        downloadBtn.disabled = false;
-        downloadBtn.style.opacity = '1';
-      }
+      document.querySelectorAll('[data-action="download-story"]').forEach(btn => {
+        btn.disabled = false;
+        btn.style.opacity = '1';
+      });
     }
   }
 
