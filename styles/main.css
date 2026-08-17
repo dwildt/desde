@@ -232,7 +232,7 @@ main {
 }
 
 .footer a {
-  color: var(--primary-orange);
+  color: var(--footer-link-color);
   text-decoration: none;
   font-weight: var(--font-weight-medium);
   transition: opacity 0.2s ease;

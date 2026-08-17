@@ -30,6 +30,9 @@
   --text-primary: #333333;
   --text-secondary: #666666;
 
+  /* Links de texto — versão escura para contraste WCAG AA (5:1 no branco) */
+  --footer-link-color: #b35400;
+
   /* Bordas e Divisores */
   --border-color: #e1e8ed;
   --border-card: var(--primary-orange);
