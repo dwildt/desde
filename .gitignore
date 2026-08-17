@@ -18,12 +18,16 @@ yarn-error.log*
 .DS_Store
 Thumbs.db
 
-# IDEs
+# IDEs e ferramentas locais
 .vscode/
 .idea/
+.claude/
 *.swp
 *.swo
 *.swn
+
+# Arquivos temporários de testes E2E
+tmp-*.json
 
 # Build
 dist/
