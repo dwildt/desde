@@ -405,7 +405,6 @@ window.addEventListener('habit:add', handleAddHabit)
 
 ## ❓ Dúvidas?
 
-- Abra uma [Discussion](https://github.com/dwildt/desde/discussions)
 - Comente em issues existentes
 - Entre em contato via [LinkedIn](https://www.linkedin.com/in/danielwildt/)
 
