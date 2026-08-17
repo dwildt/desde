@@ -28,6 +28,9 @@
     "motivação",
     "vanilla-js"
   ],
+  "engines": {
+    "node": ">=22"
+  },
   "author": "Wildtech",
   "license": "MIT",
   "bugs": {
