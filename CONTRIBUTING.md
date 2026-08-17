@@ -58,12 +58,37 @@ git remote add upstream https://github.com/dwildt/desde.git
 npm install
 
 # 5. Inicie o servidor de desenvolvimento
-npm run dev
+npm start
 ```
 
 A aplicação estará disponível em `http://localhost:3000`.
 
+## 📌 Regras de Ouro
+
+Antes de qualquer coisa, internalize essas três regras:
+
+> **1. Sem issue, sem trabalho.**
+> Toda alteração — bug fix, feature, refactor, docs — deve ter uma issue aberta no GitHub. O trabalho começa na issue, não no código.
+
+> **2. Testes e lint devem passar.**
+> Nenhum commit é aceito se `npm run lint` ou `npm test` falhar. Testes E2E (`npm run test:e2e`) são obrigatórios para mudanças em fluxos de usuário.
+
+> **3. Documentação faz parte da entrega.**
+> Ao modificar funcionalidades, rotas, arquitetura ou comportamentos visíveis ao usuário, revise e atualize os documentos afetados: `README.md`, `CONTRIBUTING.md`, e qualquer outro arquivo de apoio relevante. A entrega não está completa enquanto a documentação não refletir o estado atual.
+
+---
+
 ## 🔄 Workflow de Desenvolvimento
+
+### 0. Abra ou referencie uma Issue
+
+**Toda atividade precisa de uma issue.** Antes de criar uma branch ou escrever código:
+
+1. Verifique se já existe uma issue para o que você vai fazer em [Issues](https://github.com/dwildt/desde/issues)
+2. Se não existir, crie uma com o template adequado (Bug Report ou Feature Request)
+3. Anote o número da issue — ele será usado no nome da branch e no commit
+
+Só avance para o passo seguinte após ter um número de issue.
 
 ### 1. Crie uma Branch
 
@@ -87,6 +112,7 @@ git checkout -b tipo/descricao-curta
 - Adicione testes quando aplicável
 - Mantenha commits pequenos e focados
 - Teste localmente antes de commitar
+- **Revise a documentação**: se a mudança afeta funcionalidades visíveis, arquitetura ou comportamentos, atualize `README.md` e outros documentos de apoio antes de commitar
 
 ### 3. Execute os Testes
 
@@ -268,14 +294,15 @@ Ao abrir um PR, preencha:
 - [ ] Documentação
 
 ## Checklist
+- [ ] Issue vinculada (obrigatório — veja "Closes #" abaixo)
 - [ ] Código segue os padrões do projeto
 - [ ] Self-review realizado
-- [ ] Comentários adicionados em código complexo
-- [ ] Documentação atualizada
 - [ ] Sem novos warnings
-- [ ] Testes adicionados/atualizados
-- [ ] Todos os testes passam
-- [ ] ESLint passa sem erros
+- [ ] Testes adicionados/atualizados para as mudanças
+- [ ] `npm test` passa sem erros
+- [ ] `npm run lint` passa sem erros
+- [ ] `npm run test:e2e` passa (obrigatório para mudanças em fluxos de usuário)
+- [ ] Documentação revisada e atualizada (`README.md` e outros documentos afetados)
 
 ## Issues Relacionadas
 Closes #[número da issue]
@@ -380,7 +407,7 @@ window.addEventListener('habit:add', handleAddHabit)
 
 - Abra uma [Discussion](https://github.com/dwildt/desde/discussions)
 - Comente em issues existentes
-- Entre em contato via [LinkedIn](https://www.linkedin.com/in/davidwildt/)
+- Entre em contato via [LinkedIn](https://www.linkedin.com/in/danielwildt/)
 
 ## 🙏 Agradecimentos
 
